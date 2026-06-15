@@ -579,14 +579,11 @@ video {
    3. STRUCTURAL GLOBAL HEADER (Dark Mode Refinement & Animated Nav)
    ========================================================================== */
 .site-header {
-	/* CHANGED: Made the entire background dark to match the logo canvas from image_9434d7.jpg */
 	background-color: var(--brand-dark);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Replaced light border with a subtle dark-mode rule line */
 	position: sticky;
 	top: 0;
 	z-index: 100;
 	transition: var(--transition-smooth);
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 
 	.header-layout {
 		display: flex;
@@ -597,7 +594,6 @@ video {
 
 	.logo {
 		text-decoration: none;
-		padding: 6px 0; /* Cleaned up background block paddings since the entire header is now unified dark */
 		display: flex;
 		align-items: center;
 		gap: 8px;
@@ -609,9 +605,7 @@ video {
 		}
 
 		span {
-			color: var(
-				--brand-accent
-			); /* Safely displays amber/yellow logo vectors */
+			color: var(--brand-accent);
 		}
 	}
 
