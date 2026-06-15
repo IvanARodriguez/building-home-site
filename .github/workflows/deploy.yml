@@ -1,0 +1,27 @@
+name: Deploy to Fly.io
+
+# Controls when the action will run
+on:
+  push:
+    branches:
+      - main # Triggers the workflow on push events targetting your production branch
+
+jobs:
+  deploy:
+    name: Deploy App
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Clones your repository code onto the virtual runner
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Sets up the official Flyctl command-line tool on the runner
+      - name: Setup Flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      # Step 3: Executes the deployment command using your secure secret token
+      - name: Run Fly Deploy
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
