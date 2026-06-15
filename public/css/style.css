@@ -126,86 +126,87 @@ video {
 /* ==========================================================================
    2. HOMEPAGE SPECIFIC SECTIONS (Using Native Browser Nesting)
    ========================================================================== */
-
-/* Hero Section Module */
-.hero-wrapper {
-	background:
-		linear-gradient(
-			to bottom,
-			rgba(20, 35, 48, 0.75) 0%,
-			rgba(26, 46, 64, 0.55) 50%,
-			rgba(15, 23, 42, 0.75) 100%
-		),
-		url('https://images.unsplash.com/photo-1647579350413-a6ada4e480ed?q=80&w=1920&auto=format&fit=crop')
-			no-repeat center center / cover;
-
-	background-color: #1a2e40;
+.hero-diagonal-wrapper {
+	position: relative;
 	min-height: 85vh;
+	background-color: var(--brand-dark); /* Solid canvas base */
 	display: flex;
 	align-items: center;
-	color: var(--white);
-	text-align: center;
+	overflow: hidden;
 
-	.hero-container-lock {
-		display: flex;
-		justify-content: center;
+	/* The Photograph Layer (Flung completely to the right panel) */
+	.hero-diagonal-image {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 60%; /* Extends deep into the center view fold */
+		height: 100%;
+		background: url('https://images.unsplash.com/photo-1647579350413-a6ada4e480ed?q=80&w=1920&auto=format&fit=crop')
+			no-repeat center center / cover;
+		z-index: 1;
+	}
+
+	/* THE SHARP FORM DIVIDER: Creates the razor-crisp geometric cutting mask */
+	.hero-diagonal-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 60%; /* Overlaps into the image layer */
+		height: 100%;
+		background-color: var(--brand-dark);
+		z-index: 2;
+		clip-path: polygon(0 0, 100% 0, 78% 100%, 0 100%);
+	}
+
+	.hero-diagonal-container {
+		position: relative;
+		z-index: 10; /* Extrudes text layers over the top of the divider mask */
 		width: 100%;
 	}
 
-	.hero-content {
-		max-width: 760px;
-		margin-inline: auto;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		z-index: 5;
-
-		/* FIX: Toughened up the text shadow values for robust edge definition over light backgrounds */
-		text-shadow:
-			0 4px 18px rgba(15, 23, 42, 0.6),
-			0 2px 4px rgba(15, 23, 42, 0.4);
+	.hero-diagonal-content {
+		width: 100%;
+		max-width: min(42vw, 540px);
+		text-align: left;
+		padding-block: 5rem;
 
 		.badge {
 			display: inline-block;
-			color: var(
-				--brand-accent
-			); /* Swapped to gold to instantly pop out against the darker tint */
+			color: var(--brand-accent);
 			font-size: 0.85rem;
 			font-weight: 700;
 			letter-spacing: 0.14em;
 			text-transform: uppercase;
-			margin-bottom: 1.75rem;
+			margin-bottom: 1.5rem;
 		}
 
 		h1 {
 			color: var(--white);
 			font-family: Georgia, serif;
-			font-size: clamp(2.5rem, 5.2vw, 4.5rem);
+			font-size: clamp(
+				2.4rem,
+				4.2vw,
+				4.2rem
+			); /* Fluid typography prevents word-wrapping breaks */
 			font-weight: 400;
+			line-height: 1.15;
 			margin-bottom: 1.5rem;
 			letter-spacing: -0.01em;
-			line-height: 1.15;
 		}
 
 		p {
-			color: rgba(255, 255, 255, 0.98); /* Pushed close to solid white */
-			font-size: clamp(
-				1.1rem,
-				1.8vw,
-				1.3rem
-			); /* Increased slightly for legibility */
-			font-weight: 500; /* Added slight weight to prevent the font from thinning out */
+			color: #94a3b8;
+			font-size: clamp(1rem, 1.4vw, 1.2rem); /* Fluid text protection */
 			line-height: 1.65;
-			max-width: 640px;
 			margin-bottom: 2.75rem;
 		}
 
-		.cta-group {
+		.cta-left-group {
 			display: flex;
-			justify-content: center;
-			width: 100%;
+			justify-content: flex-start;
 		}
 
+		/* RESTORED BUTTON STYLES */
 		.btn-pill-primary {
 			display: inline-flex;
 			align-items: center;
@@ -217,9 +218,8 @@ video {
 			font-weight: 700;
 			text-decoration: none;
 			border-radius: 100px;
-			box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
-			transition: var(--transition-smooth);
-			text-shadow: none; /* Keeps button text perfectly sharp */
+			transition: all 0.3s ease-in-out;
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 
 			.arrow-icon {
 				width: 1.25rem;
@@ -228,9 +228,10 @@ video {
 			}
 
 			&:hover {
-				background-color: var(--bg-light);
+				background-color: var(--brand-accent);
+				color: var(--brand-dark);
 				transform: translateY(-2px);
-				box-shadow: 0 15px 35px rgba(15, 23, 42, 0.35);
+				box-shadow: 0 15px 30px rgba(214, 175, 55, 0.3);
 
 				.arrow-icon {
 					transform: translateX(6px);
@@ -240,7 +241,62 @@ video {
 	}
 }
 
-/* Modular About Layout Component (CSS Grid 2-Column) */
+/* ==========================================================================
+   THE BREAKPOINT BRIDGE (Fixes screen widths between 992px and 1200px)
+   ========================================================================== */
+@media (min-width: 992px) and (max-width: 1200px) {
+	.hero-diagonal-wrapper {
+		.hero-diagonal-overlay {
+			width: 55%;
+			clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
+		}
+
+		.hero-diagonal-content {
+			max-width: 44vw;
+			padding-block: 3.5rem;
+		}
+	}
+}
+
+/* ==========================================================================
+   MOBILE & TABLET OPTIMIZATIONS (Ensures clean text stack reset)
+   ========================================================================== */
+@media (max-width: 991px) {
+	.hero-diagonal-wrapper {
+		flex-direction: column;
+		justify-content: flex-start;
+		min-height: auto;
+
+		.hero-diagonal-image {
+			position: relative;
+			width: 100%;
+			height: 320px;
+			order: 2;
+		}
+
+		.hero-diagonal-overlay {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+			z-index: 1;
+		}
+
+		.hero-diagonal-content {
+			max-width: 100%;
+			text-align: center;
+			padding: 4rem 1.5rem 6rem 1.5rem;
+			order: 1;
+
+			.cta-left-group {
+				width: 100%;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+	}
+}
+
 .about-block {
 	background-color: var(--white);
 
@@ -757,9 +813,7 @@ video {
 /* ==========================================================================
    5. RESPONSIVE BREAKPOINTS (Mobile First Refinements)
    ========================================================================== */
-/* ==========================================================================
-   5. RESPONSIVE BREAKPOINTS (Mobile Menu Animations)
-   ========================================================================== */
+
 @media (max-width: 991px) {
 	.site-header {
 		.main-nav {
