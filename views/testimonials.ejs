@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+
+<!-- TESTIMONIALS HERO SECTION -->
+<section class="reviews-hero" aria-label="Client Success Showcase Context">
+  <div class="container">
+    <h1>Client Testimonials</h1>
+    <p>Explore real project metrics, design narratives, and verified feedback directly from local homeowners across the
+      Tampa Bay area.</p>
+  </div>
+</section>
+
+<!-- MASONRY REVIEW DISPLAY CARDS -->
+<section class="reviews-grid-section section-spacing">
+  <div class="container">
+    <div class="reviews-grid">
+
+      <% reviews.forEach(function(review) { %>
+      <article class="review-card">
+
+        <!-- Review Statement -->
+        <blockquote class="review-quote">
+          <%= review.quote %>
+        </blockquote>
+
+        <!-- Review Metadata Registry Context -->
+        <div class="review-metadata">
+          <h3 class="client-name"><%= review.name %></h3>
+          <p class="client-loc"><%= review.location %> &bull; <small><%= review.date %></small></p>
+
+          <div class="tag-row">
+            <span class="service-tag"><%= review.service %></span>
+          </div>
+        </div>
+
+      </article>
+      <% }); %>
+
+    </div>
+  </div>
+</section>
+
+<!-- DIRECT CONVERSION CALL-TO-ACTION CLOSER -->
+<section class="reviews-cta">
+  <div class="container">
+    <h2>Ready to Construct Your Vision?</h2>
+    <p>Connect with our engineering specialists today to establish parameters for your upcoming residential design
+      layout.</p>
+    <a href="/contact" class="btn-accent">Initialize Your Consultation</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

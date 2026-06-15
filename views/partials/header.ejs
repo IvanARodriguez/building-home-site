@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Building Home Portal" />
+  <title><%= seo.title %></title>
+  <meta name="description" content="<%= seo.description %>">
+  <meta name="keywords" content="<%= seo.keywords %>">
+
+  <meta property="og:title" content="<%= seo.title %>">
+  <meta property="og:description" content="<%= seo.description %>">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+  <a href="#main-content"
+    style="position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;"
+    onfocus="this.style='position:absolute; top:0; left:0; background:var(--brand-accent); color:var(--brand-dark); padding:1rem; z-index:999; font-weight:700; text-decoration:none;'">Skip
+    to main content</a>
+
+  <header class="site-header">
+    <div class="container header-layout">
+      <a href="/" class="logo" aria-label="Building Home - Return to Homepage">
+        <img src="/building-home-logo.svg" width="130" alt="Building Home Logo" />
+      </a>
+
+      <nav class="main-nav" aria-label="Primary Site Navigation">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/portfolio">Our Work</a></li>
+          <li><a href="/testimonials">Testimonials</a></li>
+          <li><a href="/contact" class="nav-btn">Get a Quote</a></li>
+        </ul>
+      </nav>
+
+      <button class="menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // --- 1. ACTIVE LINK LOGIC ---
+      const currentPath = window.location.pathname;
+      const navLinks = document.querySelectorAll('.main-nav a');
+
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (link.classList.contains('nav-btn')) return;
+
+        if (currentPath === href || (href !== '/' && currentPath.startsWith(href))) {
+          link.classList.add('active');
+        }
+      });
+
+      const menuToggle = document.querySelector('.menu-toggle');
+      const mainNav = document.querySelector('.main-nav');
+
+      if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', () => {
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.setAttribute('aria-expanded', !isExpanded);
+
+          menuToggle.classList.toggle('is-active');
+          mainNav.classList.toggle('is-active');
+        });
+      }
+    });
+  </script>
+
+  <main id="main-content">
