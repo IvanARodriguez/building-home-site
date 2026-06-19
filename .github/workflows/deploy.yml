@@ -1,10 +1,9 @@
 name: Deploy to Fly.io
 
-# Controls when the action will run
 on:
   push:
     branches:
-      - main # Triggers the workflow on push events targetting your production branch
+      - main
 
 jobs:
   deploy:

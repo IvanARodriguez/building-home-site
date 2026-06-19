@@ -1,0 +1,28 @@
+// COLOR PALETTE
+$brand-dark: #1a2e40;
+$brand-accent: #d4af37;
+$brand-accent-hover: #bda030;
+$text-main: #1e293b;
+$text-muted: #64748b;
+$bg-light: #f8fafc;
+$bg-dark: #0f172a;
+$white: #ffffff;
+
+// LAYOUT & UTILITIES
+$container-max: 1280px;
+$radius-md: 8px;
+$radius-xl: 16px;
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+// BREAKPOINT MIXINS
+@mixin tablet-up {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+@mixin desktop-up {
+	@media (min-width: 992px) {
+		@content;
+	}
+}

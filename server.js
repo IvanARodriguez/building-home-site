@@ -1,7 +1,14 @@
 const express = require('express');
 const path = require('path');
-const { SESClient, SendEmailCommand } = require('@aws-sdk/client-ses');
+const {
+	SESClient,
+	SendEmailCommand,
+	SendRawEmailCommand,
+} = require('@aws-sdk/client-ses');
+const multer = require('multer');
+const nodemailer = require('nodemailer');
 const rateLimit = require('express-rate-limit');
+const MailComposer = require('mailcomposer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -85,46 +92,21 @@ app.get('/services', (req, res) => {
 // Testimonials Page Route
 app.get('/testimonials', (req, res) => {
 	const seo = {
-		title: 'Client Reviews & Case Successes | Building Home Tampa Bay',
+		title: 'Licensed General Contractor Reviews | Building Home Florida',
 		description:
-			'Read verified testimonials from luxury property owners across Brandon, Wesley Chapel, St. Pete, and Clearwater regarding our custom builds, premium additions, and renovations.',
+			'Read verified testimonials from property owners regarding our custom ground-up new construction, commercial builds, and structural engineering across Florida.',
 		keywords:
-			'home builder reviews Tampa, contractor testimonials Brandon FL, kitchen remodel feedback Clearwater, luxury construction references Florida',
+			'general contractor reviews Florida, new construction testimonials, custom home builder, commercial building contractor',
 	};
 
-	// Curated local project data array passing straight to your EJS loop engine
 	const reviews = [
 		{
-			name: 'Marcus & Elena V.',
-			location: 'Wesley Chapel, FL',
-			service: 'New Custom Home Construction',
+			name: 'Ivan & Mariam',
+			location: 'Wesley Chapel | New Tampa',
+			service: 'High-Impact Hurricane Window Integration & Structural Finishes',
 			quote:
-				'Building Home turned our contemporary design dreams into a physical masterpiece. Their structural field team was transparent, communicative, and meticulously clean throughout the entire layout build phase.',
-			date: 'November 2025',
-		},
-		{
-			name: 'Sarah T.',
-			location: 'Brandon, FL',
-			service: 'Luxury Kitchen Architectural Remodel',
-			quote:
-				'I needed a complete open-concept conversion for my kitchen space. They handled the structural framing, engineering permits, and structural adjustments seamlessly. Absolute perfectionists.',
-			date: 'February 2026',
-		},
-		{
-			name: 'David K.',
-			location: 'St. Petersburg, FL',
-			service: 'Premium Room Addition',
-			quote:
-				'We brought them in for a high-end master suite expansion and roofing tie-in. The zoning, permitting coordination, and structural matching to our existing design were handled flawlessly.',
-			date: 'April 2026',
-		},
-		{
-			name: 'Robert L.',
-			location: 'Clearwater, FL',
-			service: 'Whole Home Transformation',
-			quote:
-				'From the new architectural metal roof down to the premium wide-plank flooring, their execution was exceptional. They managed the local municipal building permits without a single hiccup.',
-			date: 'May 2026',
+				'We hired Building Home to replace all the windows throughout our home with high-impact hurricane glass and advanced UV protection. The entire construction execution process was incredibly streamlined, and the communication from their team was consistently proactive. The final structural finishes delivered by the crew were significantly better than the original finishes of the house itself.',
+			date: 'June 2026',
 		},
 	];
 
@@ -142,10 +124,20 @@ app.get('/contact', (req, res) => {
 	res.render('contact', { seo, msg: null, err: null });
 });
 
-app.post('/contact', contactLimiter, async (req, res) => {
+// 1. Define the storage engine
+const storage = multer.memoryStorage();
+
+// 2. Initialize the multer instance with your storage options (This was the missing step!)
+const upload = multer({ storage: storage });
+
+// 3. Create your specific single-file middleware field target
+const uploadSingle = upload.single('blueprintUpload');
+
+app.post('/contact', contactLimiter, uploadSingle, async (req, res) => {
 	const { name, email, phone, service, budget, message, mid_initial_hp } =
 		req.body;
 	const defaultContactSeo = { title: 'Contact Our Builders | Building Home' };
+	const uploadedFile = req.file; // This holds the file buffer, name, and size data
 
 	// 1. ANTI-SPAM: Honeypot Verification
 	if (mid_initial_hp) {
@@ -166,7 +158,6 @@ app.post('/contact', contactLimiter, async (req, res) => {
 		});
 	}
 
-	// Only validate the structural email string format server-side
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	if (!emailRegex.test(email)) {
 		return res.render('contact', {
@@ -176,9 +167,9 @@ app.post('/contact', contactLimiter, async (req, res) => {
 		});
 	}
 
-	// 3. TEXT SANITIZATION & CLEANUP (Phone validation removed here)
+	// 3. TEXT SANITIZATION & CLEANUP
 	const cleanName = name.replace(/[^\w\s.-]/g, '').trim();
-	const cleanPhone = phone.replace(/[<>]/g, '').trim(); // Simple script-injection stripping only
+	const cleanPhone = phone.replace(/[<>]/g, '').trim();
 	const cleanMessage = message
 		.replace(/</g, '&lt;')
 		.replace(/>/g, '&gt;')
@@ -208,29 +199,19 @@ app.post('/contact', contactLimiter, async (req, res) => {
                         </tr>
                         <tr>
                             <td style="padding: 40px 30px;">
-                                <h1 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 800; color: #1a2e40; tracking-tight: -0.02em;">Project Consultation Logged</h1>
+                                <h1 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 800; color: #1a2e40;">Project Consultation Logged</h1>
                                 <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: #64748b;">Hello ${cleanName},</p>
-                                <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: #64748b;">Thank you for contacting Building Home. We have securely received your design specs and target financial parameters. A regional project coordinator is reviewing your details.</p>
+                                <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: #64748b;">Thank you for contacting Building Home. We have securely received your design specs, plans, and target financial parameters. A regional project coordinator is reviewing your details.</p>
                                 
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc; border-radius: 8px; border: 1px solid #edf2f7; margin-bottom: 24px; padding: 20px;">
-                                    <tr>
-                                        <td style="padding-bottom: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em;">Selected Focus Profile</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-bottom: 16px; font-size: 15px; font-weight: 600; color: #1a2e40;">${service}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-bottom: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em;">Targeted Investment Range</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-bottom: 16px; font-size: 15px; font-weight: 700; color: #d4af37;">${budget}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-bottom: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em;">Your Description Overview</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size: 14px; line-height: 1.6; color: #475569; font-style: italic;">"${cleanMessage}"</td>
-                                    </tr>
+                                    <tr><td style="padding-bottom: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em;">Selected Focus Profile</td></tr>
+                                    <tr><td style="padding-bottom: 16px; font-size: 15px; font-weight: 600; color: #1a2e40;">${service}</td></tr>
+                                    <tr><td style="padding-bottom: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em;">Targeted Investment Range</td></tr>
+                                    <tr><td style="padding-bottom: 16px; font-size: 15px; font-weight: 700; color: #d4af37;">${budget}</td></tr>
+                                    <tr><td style="padding-bottom: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em;">Plan Attachment Status</td></tr>
+                                    <tr><td style="padding-bottom: 16px; font-size: 14px; font-weight: 600; color: #1e293b;">${uploadedFile ? 'Document Uploaded Successfully' : 'No Document Attached'}</td></tr>
+                                    <tr><td style="padding-bottom: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em;">Your Description Overview</td></tr>
+                                    <tr><td style="font-size: 14px; line-height: 1.6; color: #475569; font-style: italic;">"${cleanMessage}"</td></tr>
                                 </table>
 
                                 <p style="margin: 0 0 8px 0; font-size: 15px; line-height: 1.6; color: #1e293b;"><strong>Next Phase Steps</strong></p>
@@ -250,10 +231,10 @@ app.post('/contact', contactLimiter, async (req, res) => {
         </table>
     </body>
     </html>
-    `;
+  `;
 
 	// ==========================================================================
-	// EMAIL TEMPLATE B: OWNER ACTION DASHBOARD (CLEANED FROM EMOJIS)
+	// EMAIL TEMPLATE B: OWNER ACTION DASHBOARD (WITH FILE STATUS LINK)
 	// ==========================================================================
 	const ownerHtmlBody = `
     <!DOCTYPE html>
@@ -277,7 +258,7 @@ app.post('/contact', contactLimiter, async (req, res) => {
                         <tr>
                             <td style="padding: 35px;">
                                 <h2 style="margin: 0 0 6px 0; font-size: 20px; font-weight: 800; color: #1a2e40;">Project Parameters Dispatched</h2>
-                                <p style="margin: 0 0 25px 0; font-size: 14px; color: #64748b;">A fresh project request has cleared the frontend security layers:</p>
+                                <p style="margin: 0 0 25px 0; font-size: 14px; color: #64748b;">A fresh project blueprint request has cleared security layers:</p>
                                 
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 30px; font-size: 15px;">
                                     <tr>
@@ -300,21 +281,25 @@ app.post('/contact', contactLimiter, async (req, res) => {
                                         <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #475569;">Target Budget:</td>
                                         <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #d4af37; font-weight: 700;">${budget}</td>
                                     </tr>
+                                    <tr>
+                                        <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #475569;">Plan Attached:</td>
+                                        <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-weight: 600;">${uploadedFile ? `Yes (${uploadedFile.originalname})` : 'No blueprint attached'}</td>
+                                    </tr>
                                 </table>
 
-                                <div style="background-color: #f8fafc; border-left: 4px solid #1a2e40; padding: 20px; border-radius: 0 8px 8px 0; border: 1px solid #edf2f7; border-left: 4px solid #1a2e40;">
+                                <div style="background-color: #f8fafc; border-left: 4px solid #1a2e40; padding: 20px; border-radius: 0 8px 8px 0; border: 1px solid #edf2f7; margin-bottom: 30px;">
                                     <h4 style="margin: 0 0 10px 0; font-size: 11px; font-weight: 800; text-transform: uppercase; color: #475569; letter-spacing: 0.05em;">Detailed Project Description:</h4>
                                     <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #1e293b; white-space: pre-wrap;">${cleanMessage}</p>
                                 </div>
 
-                                <div style="margin-top: 35px; text-align: center;">
+                                <div style="text-align: center;">
                                     <a href="mailto:${email}?subject=Re: Building Home Consultation - ${service}" style="display: inline-block; background-color: #1a2e40; color: #ffffff; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; padding: 14px 28px; border-radius: 6px; text-decoration: none;">Reply Instantly via Email</a>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td align="center" style="background-color: #0f172a; padding: 15px; font-size: 11px; color: #475569;">
-                                Internal Dispatch Capture Engine • AWS SES Matrix Protected
+                                Internal Dispatch Capture Engine • AWS SES MIME Raw Engine
                             </td>
                         </tr>
                     </table>
@@ -323,54 +308,68 @@ app.post('/contact', contactLimiter, async (req, res) => {
         </table>
     </body>
     </html>
-    `;
-
-	// ==========================================================================
-	// EXECUTE SEQUENTIAL AWS SES COMMAND DELIVERIES (PROMOTIONS TAB MITIGATED)
-	// ==========================================================================
-	const ownerEmailParams = {
-		Source: process.env.NOTIFICATION_EMAIL,
-		Destination: { ToAddresses: [process.env.NOTIFICATION_RECEIVER] },
-		Message: {
-			Subject: {
-				Data: `Project Scope Request from ${cleanName}`,
-				Charset: 'UTF-8',
-			},
-			Body: { Html: { Data: ownerHtmlBody, Charset: 'UTF-8' } },
-		},
-		ReplyToAddresses: [email],
-		Headers: [
-			{ Name: 'X-Auto-Response-Suppress', Value: 'All' },
-			{ Name: 'Precedence', Value: 'bulk' },
-		],
-	};
-
-	const clientEmailParams = {
-		Source: process.env.NOTIFICATION_EMAIL,
-		Destination: { ToAddresses: [email] },
-		Message: {
-			Subject: {
-				Data: `Consultation Received: ${service} Profile | Building Home`,
-				Charset: 'UTF-8',
-			},
-			Body: { Html: { Data: clientHtmlBody, Charset: 'UTF-8' } },
-		},
-	};
+  `;
 
 	try {
-		await Promise.all([
-			sesClient.send(new SendEmailCommand(ownerEmailParams)),
-			sesClient.send(new SendEmailCommand(clientEmailParams)),
+		// 4. USE MAILCOMPOSER TO COMPILE RAW MIME STRINGS Safely
+		const ownerMailConfig = {
+			from: process.env.NOTIFICATION_EMAIL,
+			to: process.env.NOTIFICATION_RECEIVER,
+			subject: `Project Scope Request from ${cleanName}`,
+			html: ownerHtmlBody,
+			replyTo: email,
+			headers: {
+				'X-Auto-Response-Suppress': 'All',
+				Precedence: 'bulk',
+			},
+			attachments: uploadedFile
+				? [
+						{
+							filename: uploadedFile.originalname,
+							content: uploadedFile.buffer, // Pulled safely from Node.js memory
+						},
+					]
+				: [],
+		};
+
+		const clientMailConfig = {
+			from: process.env.NOTIFICATION_EMAIL,
+			to: email,
+			subject: `Consultation Received: ${service} Profile | Building Home`,
+			html: clientHtmlBody,
+		};
+
+		const [rawOwnerEmail, rawClientEmail] = await Promise.all([
+			new Promise((resolve, reject) => {
+				new MailComposer(ownerMailConfig).build((err, message) => {
+					if (err) return reject(err);
+					resolve(message);
+				});
+			}),
+			new Promise((resolve, reject) => {
+				new MailComposer(clientMailConfig).build((err, message) => {
+					if (err) return reject(err);
+					resolve(message);
+				});
+			}),
 		]);
 
+		await Promise.all([
+			sesClient.send(
+				new SendRawEmailCommand({ RawMessage: { Data: rawOwnerEmail } }),
+			),
+			sesClient.send(
+				new SendRawEmailCommand({ RawMessage: { Data: rawClientEmail } }),
+			),
+		]);
 		return res.render('contact', {
 			seo: defaultContactSeo,
-			msg: 'Submission Received',
+			msg: 'Submission Received! Your project parameters and files have been safely uploaded.',
 			err: null,
 		});
 	} catch (error) {
 		console.error(
-			'Infrastructure Error during dual AWS SES HTML processing action:',
+			'Infrastructure Error during dual AWS SES Raw processing action:',
 			error,
 		);
 		return res.render('contact', {
@@ -379,6 +378,18 @@ app.post('/contact', contactLimiter, async (req, res) => {
 			err: 'An infrastructure communication error occurred during mail delivery. Please try again.',
 		});
 	}
+});
+
+// 5. Terms of Service Page Route
+app.get('/terms', (req, res) => {
+	const seo = {
+		title: 'Terms of Service | Licensed Contractor Statutory Disclosures',
+		description:
+			'Review the regulatory framework, structural project insurance policies, and statutory compliance clauses for licensed operations under FL CBC1267326.',
+		keywords:
+			'building home terms, construction service conditions Florida, general contracting terms Tampa',
+	};
+	res.render('terms', { seo });
 });
 
 // Catch-all fallbacks: If route doesn't match, send back home safely

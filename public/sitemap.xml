@@ -4,7 +4,7 @@
   <!-- ROOT HOME PAGE (Highest Priority) -->
   <url>
     <loc>https://www.buildinghomeco.com/</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
   </url>
@@ -12,7 +12,7 @@
   <!-- ABOUT / CRAFTSMEN MODULE -->
   <url>
     <loc>https://www.buildinghomeco.com/about</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -20,31 +20,7 @@
   <!-- MAIN SERVICES ECOSYSTEM MAP -->
   <url>
     <loc>https://www.buildinghomeco.com/services</loc>
-    <lastmod>2026-06-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- SUB-SERVICE: CUSTOM HOME BUILDING -->
-  <url>
-    <loc>https://www.buildinghomeco.com/services/custom-home</loc>
-    <lastmod>2026-06-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- SUB-SERVICE: HOME ENHANCEMENTS -->
-  <url>
-    <loc>https://www.buildinghomeco.com/services/enhancements</loc>
-    <lastmod>2026-06-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- SUB-SERVICE: CONTEMPORARY REMODELING -->
-  <url>
-    <loc>https://www.buildinghomeco.com/services/remodeling</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -52,7 +28,7 @@
   <!-- CONSULTATION / CONTACT GATEWAY -->
   <url>
     <loc>https://www.buildinghomeco.com/contact</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>

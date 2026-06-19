@@ -28,6 +28,13 @@
     to main content</a>
 
   <header class="site-header">
+    <div
+      style="background: #0f172a; color: #94a3b8; font-size: 0.75rem; padding: 0.4rem 0; border-bottom: 1px solid #1e293b;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>Florida Certified Licensed General Contractor</span>
+        <span style="color: #d4af37; font-weight: 700;">FL License #CBC1267326</span>
+      </div>
+    </div>
     <div class="container header-layout">
       <a href="/" class="logo" aria-label="Building Home - Return to Homepage">
         <img src="/building-home-logo.svg" width="130" alt="Building Home Logo" />
@@ -38,8 +45,8 @@
           <li><a href="/">Home</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/services">Services</a></li>
-          <li><a href="/portfolio">Our Work</a></li>
           <li><a href="/testimonials">Testimonials</a></li>
+          <li><a href="/terms">Terms</a></li>
           <li><a href="/contact" class="nav-btn">Get a Quote</a></li>
         </ul>
       </nav>
@@ -52,12 +59,11 @@
     </div>
   </header>
 
-
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       // --- 1. ACTIVE LINK LOGIC ---
       const currentPath = window.location.pathname;
-      const navLinks = document.querySelectorAll('.main-nav a');
+      const navLinks = document.querySelectorAll('.main-nav a, .footer-nav a');
 
       navLinks.forEach(link => {
         const href = link.getAttribute('href');

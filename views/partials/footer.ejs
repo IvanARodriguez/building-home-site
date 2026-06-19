@@ -1,41 +1,54 @@
 </main>
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
+  <div class="container footer-grid">
 
-      <div class="brand-column">
-        <h3>Building<span>Home</span></h3>
-        <p>Crafting upscale, contemporary living environments across the entire Greater Tampa Bay market area.</p>
+    <!-- BRAND COLUMN -->
+    <div class="brand-column">
+      <a href="/" class="footer-logo" aria-label="Building Home - Return to Homepage">
+        <img src="/building-home-logo.svg" width="130" alt="Building Home Logo" />
+      </a>
+      <p>
+        Florida Certified new construction and structural framing specialists. Delivering premier custom estates from
+        foundation to handover across the entire State of Florida.
+      </p>
+      <div class="legal-badge">
+        <span class="license-number">FL License #CBC1267326</span>
       </div>
-
-      <div class="links-column">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="/about">About Our Craftsmen</a></li>
-          <li><a href="/portfolio">Project Registry</a></li>
-          <li><a href="/testimonials">Client Reviews</a></li>
-          <li><a href="/contact">Initial Consultation</a></li>
-        </ul>
-      </div>
-
-      <div class="links-column">
-        <h4>Service Markets</h4>
-        <ul>
-          <li><a href="/areas/brandon">Brandon, FL</a></li>
-          <li><a href="/areas/tampa">Tampa Bay Area</a></li>
-          <li><a href="/areas/clearwater">Clearwater Coastal</a></li>
-          <li><a href="/areas/st-pete">St. Petersburg</a></li>
-          <li><a href="/areas/wesley-chapel">Wesley Chapel</a></li>
-        </ul>
-      </div>
-
     </div>
 
-    <div class="bottom-bar">
-      <p>&copy; <%= new Date().getFullYear() %> Building Home. All rights reserved. Built for elite regional
-        performance.</p>
-      <p style="font-size: 0.8rem; color: #64748b;">Licensed & Structurally Certified</p>
+    <!-- STRATEGIC NAVIGATION Links Column -->
+    <div class="links-column">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">Our Standards</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/portfolio">Our Work</a></li>
+        <li><a href="/terms">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <!-- COVERAGE AREA Links Column -->
+    <div class="links-column">
+      <h4>Coverage Area</h4>
+      <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0; max-width: 300px;">
+        Providing comprehensive residential construction services statewide. Fully insured and licensed for municipal,
+        interior, and high-velocity coastal storm zones throughout Florida.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM BAR (Cleaned up container hierarchy to fix breaking flex lines) -->
+  <div class="container">
+    <div class="bottom-bar" style="border-top: 1px solid #1e293b; padding-top: 2rem; width: 100%;">
+      <p>&copy; <%= new Date().getFullYear() %> Building Home. All rights reserved.</p>
+      <p class="footer-disclaimer">
+        All construction projects are subject to the <a href="/terms"
+          style="color: inherit; text-decoration: underline;">Terms of Service</a>, specifications, and regulatory
+        frameworks outlined under FL statute regulations.
+      </p>
     </div>
   </div>
 </footer>

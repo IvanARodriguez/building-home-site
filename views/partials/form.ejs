@@ -1,6 +1,3 @@
-<!-- views/partials/form.ejs -->
-
-<!-- Dynamic Node Status Messages Alerts -->
 <% if (typeof msg !== 'undefined' && msg) { %>
 <div class="status-alert success" role="alert"
   style="margin-bottom: 20px; padding: 15px; background: #ecfdf5; color: #065f46; border-radius: 6px; border: 1px solid #a7f3d0; font-weight: 600;">
@@ -15,15 +12,13 @@
 </div>
 <% } %>
 
-<form action="/contact" method="POST" class="modular-form" autocomplete="on">
+<form action="/contact" method="POST" class="modular-form" autocomplete="on" enctype="multipart/form-data">
 
-  <!-- ANTI-SPAM DEFENSE LAYER (Honeypot) -->
   <div style="display: none;" aria-hidden="true">
     <label for="mid_initial_hp">Leave this field entirely blank if you are a human user</label>
     <input type="text" id="mid_initial_hp" name="mid_initial_hp" tabindex="-1" autocomplete="off">
   </div>
 
-  <!-- ROW: NAME & EMAIL -->
   <div class="field-group">
     <label for="name">Contact Name</label>
     <input type="text" id="name" name="name" required placeholder="John Doe" autocomplete="name">
@@ -34,53 +29,45 @@
     <input type="email" id="email" name="email" required placeholder="johndoe@domain.com" autocomplete="email">
   </div>
 
-  <!-- PHONE NUMBER (Validation Restrictions Removed) -->
   <div class="field-group">
     <label for="phone">Phone Number</label>
     <input type="tel" id="phone" name="phone" required placeholder="(813) 555-0199" autocomplete="tel">
   </div>
 
-  <!-- ALL EXPANED SERVICE CHANNELS -->
   <div class="field-group">
     <label for="service">Required Structural Focus</label>
     <select id="service" name="service" required>
       <option value="" disabled selected>Select scope profile...</option>
       <option value="Custom Home Construction">New Custom Home Construction</option>
-      <option value="Whole Home Remodeling">Whole Home Transformation</option>
-      <option value="Premium Spatial Enhancements">Premium Room Addition / Extension</option>
-      <option value="Luxury Kitchen Architectural Remodeling">Luxury Kitchen Architectural Remodel</option>
-      <option value="High-End Master Suite Renovation">High-End Master Suite Renovation</option>
-      <option value="Small Bathroom Renovation">Small Bathroom Renovation</option>
-      <option value="Custom Closet & Organization Systems">Custom Closet & Storage System</option>
-      <option value="Premium Flooring Upgrades">Premium Flooring Installation</option>
-      <option value="Architectural Roofing & Storm Protection">Architectural Roofing & Repair</option>
+      <option value="Commercial Structural Buildout">Commercial Shell & Structural Buildout</option>
+      <option value="Premium Spatial Enhancements">Premium Room Addition / Footprint Extension</option>
+      <option value="Whole Home Transformation">Whole Home Architectural Remodeling</option>
       <option value="Permit Expediting & Zoning Consultations">Permit Management & Zoning Consultation</option>
-      <option value="Commercial Structural Buildout">Commercial Structural Buildout</option>
     </select>
   </div>
 
-  <!-- BUDGET SELECTION RANGE -->
-  <div class="field-group">
+  <div class="field-group full-width">
+    <label for="blueprint-upload">Attach Blueprints, Site Plans, or Structural Notes (Optional)</label>
+    <input type="file" id="blueprint-upload" name="blueprintUpload" accept=".pdf,.zip,.dwg,.jpg,.jpeg,.png">
+  </div>
+
+  <div class="field-group full-width">
     <label for="budget">Target Investment Parameters</label>
     <select id="budget" name="budget" required>
       <option value="" disabled selected>Select investment scope...</option>
-      <option value="Under $10,000">Under $10,000 (Closets / Small Repairs)</option>
-      <option value="$10,000 - $30,000">$10,000 - $30,000 (Bathrooms / Flooring)</option>
-      <option value="$30,000 - $50,000">$30,000 - $50,000</option>
-      <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+      <option value="$50,000 - $100,000">$50,000 - $100,000 (Structural Additions / Plan Drafting)</option>
       <option value="$100,000 - $250,000">$100,000 - $250,000</option>
       <option value="$250,000 - $500,000">$250,000 - $500,000</option>
-      <option value="$500,000 - $1,000,000">$500,000 - $1,000,000</option>
-      <option value="$1,000,000+">$1,000,000+ (Custom Estates / Commercial)</option>
+      <option value="$500,000 - $1,000,000">$500,000 - $1,000,000 (Spec Homes)</option>
+      <option value="$1,000,000+">$1,000,000+ (Custom Estates / Commercial Blocks)</option>
     </select>
   </div>
 
-  <!-- PROJECT SPECIFICS DESCRIPTION -->
-  <div class="field-group">
+  <div class="field-group full-width">
     <label for="message">Detailed Project Description</label>
     <textarea id="message" name="message" rows="5" required
-      placeholder="Outline square footage parameters, material preferences, or specific area locations..."></textarea>
+      placeholder="Outline square footage parameters, acreage attributes, or specific parcel locations..."></textarea>
   </div>
 
-  <button type="submit" class="submit-trigger">CONTACT US NOW</button>
+  <button type="submit" class="submit-trigger">Initialize Project Scope</button>
 </form>

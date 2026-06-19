@@ -4,8 +4,10 @@
 	"description": "",
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js",
-		"dev": "nodemon server.js"
+		"start": "npm run build-scss && node server.js",
+		"build-scss": "sass scss/style.scss public/css/style.css --style=compressed",
+		"watch-scss": "sass scss/style.scss public/css/style.css --watch",
+		"dev": "concurrently \"npm run watch-scss\" \"nodemon server.js\""
 	},
 	"keywords": [],
 	"author": "",
@@ -17,10 +19,15 @@
 		"dotenv": "^17.4.2",
 		"ejs": "^6.0.1",
 		"express": "^5.2.1",
-		"express-rate-limit": "^8.5.2"
+		"express-rate-limit": "^8.5.2",
+		"mailcomposer": "^4.0.2",
+		"multer": "^2.2.0",
+		"nodemailer": "^9.0.1"
 	},
 	"devDependencies": {
 		"@flydotio/dockerfile": "^0.7.10",
-		"nodemon": "^3.1.14"
+		"concurrently": "^8.2.2",
+		"nodemon": "^3.1.14",
+		"sass": "^1.101.0"
 	}
 }

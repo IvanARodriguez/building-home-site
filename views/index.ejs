@@ -1,21 +1,23 @@
 <%- include('partials/header') %>
 
-<section class="hero-diagonal-wrapper" aria-label="Tampa Bay Custom Home Construction Portfolio">
+<!-- SECTION 1: HERO MODULE - Florida Certified Authority Baseline -->
+<section class="hero-diagonal-wrapper" aria-label="Licensed General Contractor Custom New Construction Florida">
 
   <div class="hero-diagonal-image"></div>
-
   <div class="hero-diagonal-overlay"></div>
 
   <div class="container hero-diagonal-container">
     <div class="hero-diagonal-content">
-      <span class="badge">Custom Home Builder • General Contractor</span>
-      <h1>Build the home <br>you'll love</h1>
-      <p>Partner with a dedicated building contractor to break ground on your custom home, structural addition, or
-        complete luxury remodel anywhere across the entire Tampa Bay Area.</p>
+      <span class="badge">Florida Certified Licensed General Contractor • Building Home • License #CBC1267326</span>
+
+      <h1>Florida Custom New Construction</h1>
+      <p>Partner with Building Home, a premier Florida Certified licensed general contractor specializing in ground-up
+        custom estate construction, heavy structural concrete framing, and commercial new construction developments
+        across Florida.</p>
 
       <div class="cta-left-group">
-        <a href="/contact" class="btn-pill-primary">
-          Get started
+        <a href="#quote-section" class="btn-pill-primary">
+          Upload Build Plans & Get a Quote
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
             stroke="currentColor" class="arrow-icon" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin='round' d='M13.5 4.5l6 6m0 0l-6 6m6-6H3' />
@@ -26,98 +28,130 @@
   </div>
 
 </section>
+
+<!-- SECTION 2: THE ABOUT BLOCK - Ground-Up Construction Focus -->
 <section class="about-block section-spacing">
   <div class="container grid-layout">
     <div class="info-column">
-      <span class="meta-tag">Service Architecture</span>
-      <h2>Elevating West Coast Florida with Timeless Spaces</h2>
-      <p>Originally breaking ground in Brandon, FL, Building Home configures structural extensions, home enhancements,
-        and high-end remodeling architectures for demanding environments.</p>
-      <p>We analyze the building physics of each project territory natively—adapting styles seamlessly from open-concept
-        layouts in Clearwater to modern updates across St. Petersburg.</p>
-      <a href="/about" class="link-arrow">Meet Our Craftsmen &rarr;</a>
+      <span class="meta-tag">Licensed General Contractor</span>
+      <!-- FIXED: High SEO-weight header strictly for construction rankings -->
+      <h2>Statewide Custom New Construction Specialists</h2>
+      <p>Building Home operates under the direct command of Florida Certified licensed general contractor [Your Name
+        Here], delivering dedicated, statewide new construction management. Our team does not take on cosmetic home
+        updates or minor remodeling fixes. Our entire operational footprint is engineered exclusively for ground-up
+        custom estates, high-scale structural framing, and managing new commercial construction builds from foundation
+        excavation to final handover.</p>
+      <p>As a leading certified building contractor in Florida, our heavy structural floor plans are engineered to
+        easily withstand volatile coastal high-velocity hurricane zones (HVHZ) and comply flawlessly with strict
+        statewide building structural codes.</p>
+      <a href="/about" class="link-arrow">Our Construction Standards &rarr;</a>
     </div>
 
     <div class="graphic-frame">
       <img src="/images/kitchen-design.webp"
-        alt="Minimalist structural interior render showing clean geometry and natural glass mapping">
+        alt="Florida Certified licensed general contractor custom new construction project site layout">
     </div>
   </div>
 </section>
 
-<!-- SECTION 3: SERVICES MATRIX -->
-<section class="services-matrix section-spacing">
+<!-- SECTION 3: REVISED WORKFLOW MATRIX - Clean Action Funnels Targeting New Construction -->
+<section class="services-matrix section-spacing" id="services-section" aria-labelledby="matrix-title">
   <div class="container">
+
     <div class="matrix-heading">
       <div>
-        <span class="meta-tag">Capabilities</span>
-        <h2>Our Construction Ecosystem</h2>
+        <span class="meta-tag">Certified Contracting Expertise</span>
+        <h2 id="matrix-title">Florida Commercial & Custom New Construction</h2>
       </div>
-      <a href="/services" class="view-all">View All Structural Specs &rarr;</a>
+      <p class="matrix-subtitle">From initial blueprint review to final structural inspection, we offer end-to-end
+        general contracting and custom home construction across Florida.</p>
     </div>
 
     <div class="cards-grid">
-      <article class="service-card">
-        <h3>Custom Home Building</h3>
-        <p>Architectural engineering blueprints engineered perfectly to withstand coastal wind mandates without
-          compromising clean aesthetic geometry.</p>
-        <a href="/services/custom-home" class="card-link">Explore Blueprints</a>
+
+      <article class="service-card" aria-labelledby="srv-custom-home">
+        <div class="card-header-badge">
+          <span class="step-num">Phase 01</span>
+          <span class="step-label">Blueprint Review & Audit</span>
+        </div>
+        <h3 id="srv-custom-home">Custom Home Construction</h3>
+        <p>Ground-up structural execution tailored strictly to custom residential blueprints. We specialize in heavy
+          site development, deep-soil concrete footings, slab pours, and structural steel framing designed to exceed
+          Florida code demands.</p>
+        <a href="#quote-section" class="card-link" aria-describedby="srv-custom-home">Upload Residential Plans
+          &rarr;</a>
       </article>
-      <article class="service-card">
-        <h3>Home Enhancements</h3>
-        <p>Heavy structural column transfers, custom premium additions, and continuous open room configurations that
-          elevate property asset metrics.</p>
-        <a href="/services/enhancements" class="card-link">Explore Scale</a>
+
+      <article class="service-card" aria-labelledby="srv-commercial">
+        <div class="card-header-badge">
+          <span class="step-num">Phase 02</span>
+          <span class="step-label">Site Permitting</span>
+        </div>
+        <h3 id="srv-commercial">Commercial New Construction</h3>
+        <p>Complete shell building and commercial general contractor oversight for retail blocks, office complexes, and
+          light industrial builds. We seamlessly manage early-stage zoning, municipal engineering, and total site
+          development.</p>
+        <a href="#quote-section" class="card-link" aria-describedby="srv-commercial">Submit Commercial Bid Plans
+          &rarr;</a>
       </article>
-      <article class="service-card">
-        <h3>Contemporary Remodeling</h3>
-        <p>Complete luxury overhauls for kitchens, architectural bathrooms, and exterior visual renovations aligned with
-          upscale design specifications.</p>
-        <a href="/services/remodeling" class="card-link">Explore Overhauls</a>
+
+      <article class="service-card" aria-labelledby="srv-structural">
+        <div class="card-header-badge">
+          <span class="step-num">Phase 03</span>
+          <span class="step-label">Execution</span>
+        </div>
+        <h3 id="srv-structural">High-Scale Structural Additions</h3>
+        <p>Large-scale architectural expansions and massive commercial footprint additions. Our expert field workflows
+          handle continuous engineered roof tie-ins, heavy load-bearing structural column transfers, and foundation
+          expansions.</p>
+        <a href="#quote-section" class="card-link" aria-describedby="srv-structural">Submit Addition Blueprints
+          &rarr;</a>
       </article>
+
     </div>
   </div>
 </section>
 
-<!-- SECTION 4: REGIONAL TRUST MARKERS -->
+<!-- SECTION 4: TRUST MARKERS - Formed From Licensed Contractor Mandates -->
 <section class="trust-props section-spacing">
   <div class="container">
-    <span class="meta-tag">Quality Guarantees</span>
-    <h2>Why Builders Choose Our Engineering Group</h2>
+    <span class="meta-tag">Contractor Safeguards</span>
+    <h2>Built on Solid Legal & Professional Standards</h2>
 
     <div class="props-grid">
       <div class="prop-item">
-        <div class="icon-circle" aria-hidden="true">☀️</div>
-        <h3>Zone Engineering</h3>
-        <p>Complete configuration mapping tailored to comply fully with local high velocity storm thresholds and Florida
-          structural standards.</p>
+        <div class="icon-circle" aria-hidden="true">📜</div>
+        <h3>Licensed Contractor Verification</h3>
+        <p>Fully certified and registered under Florida License #CBC1267326 with Building Home named as the primary
+          qualifying professional. We carry multi-million dollar structural liability insurance policies and worker
+          protections.</p>
       </div>
       <div class="prop-item">
-        <div class="icon-circle" aria-hidden="true">💎</div>
-        <h3>Geometric Cleanliness</h3>
-        <p>Eliminating visible clutter to focus directly on continuous spatial volume tracking, premium textures, and
-          glass balance layouts.</p>
+        <div class="icon-circle" aria-hidden="true">⚓</div>
+        <h3>New Construction Compliance</h3>
+        <p>We accept total regulatory liability for all ground-up projects, passing structural wind load mitigation and
+          municipal code inspections effortlessly across all jurisdictions.</p>
       </div>
       <div class="prop-item">
-        <div class="icon-circle" aria-hidden="true">🛡️</div>
-        <h3>Tri-County Compliant</h3>
-        <p>Active multi-million dollar structural liability policies and complete regulatory certifications in Pasco,
-          Pinellas, and Hillsborough.</p>
+        <div class="icon-circle" aria-hidden="true">🤝</div>
+        <h3>Exact Blueprint Execution</h3>
+        <p>No unexpected material substitutions. Our custom home construction firm executes your exact approved
+          engineering plans, meaning any blueprint or layout changes require your explicit signature first.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- SECTION 5: LEAD GENERATION CONTROLLER -->
-<section class="lead-capture section-spacing">
+<section id="quote-section" class="lead-capture section-spacing">
   <div class="container form-container">
     <div class="intro-text">
-      <h2>Initialize Project Scope</h2>
-      <p>Our consulting engineers maintain active deployment timelines in your area. Submit your design metrics below.
-      </p>
+      <h2>Initialize Your New Build</h2>
+      <p>Have blueprints, site layouts, or engineered plans ready? Upload your construction documents below to schedule
+        a direct plan review and budget estimation with licensed general contractor Building Home.</p>
     </div>
 
-    <!-- REUSABLE INJECTED ARCHITECTURE -->
+    <!-- Injecting the file-upload optimized form element -->
     <%- include('partials/form') %>
 
   </div>

@@ -1,34 +1,40 @@
 <%- include('partials/header') %>
 
 <!-- TESTIMONIALS HERO SECTION -->
-<section class="reviews-hero" aria-label="Client Success Showcase Context">
+<section class="reviews-hero" aria-label="Florida Certified Licensed Contractor Reviews Context">
   <div class="container">
-    <h1>Client Testimonials</h1>
-    <p>Explore real project metrics, design narratives, and verified feedback directly from local homeowners across the
-      Tampa Bay area.</p>
+    <!-- FIXED: Added heavy keywords and clear authority tag -->
+    <span class="badge" style="display: inline-block; margin-bottom: 1rem;">Florida Certified Licensed General
+      Contractor
+      • License #CBC1267326</span>
+    <h1>Verified Construction Success</h1>
+    <p>Explore real structural metrics, ground-up build achievements, and verified feedback directly from local property
+      owners who partnered with Building Home.</p>
   </div>
 </section>
 
-<!-- MASONRY REVIEW DISPLAY CARDS -->
 <section class="reviews-grid-section section-spacing">
   <div class="container">
     <div class="reviews-grid">
 
-      <% reviews.forEach(function(review) { %>
-      <article class="review-card">
+      <% reviews.forEach(function(review, index) { %>
+      <article class="review-card"
+        <%= index === 0 ? 'style="border: 2px solid var(--brand-accent, #d4af37); background: #0f172a;"' : '' %>>
 
-        <!-- Review Statement -->
         <blockquote class="review-quote">
           <%= review.quote %>
         </blockquote>
 
-        <!-- Review Metadata Registry Context -->
         <div class="review-metadata">
           <h3 class="client-name"><%= review.name %></h3>
           <p class="client-loc"><%= review.location %> &bull; <small><%= review.date %></small></p>
 
           <div class="tag-row">
             <span class="service-tag"><%= review.service %></span>
+            <% if (index === 0) { %>
+            <span class="service-tag" style="background: #d4af37; color: #000; font-weight: 700;">100% Authentic Case
+              Study</span>
+            <% } %>
           </div>
         </div>
 
@@ -39,13 +45,12 @@
   </div>
 </section>
 
-<!-- DIRECT CONVERSION CALL-TO-ACTION CLOSER -->
 <section class="reviews-cta">
   <div class="container">
-    <h2>Ready to Construct Your Vision?</h2>
-    <p>Connect with our engineering specialists today to establish parameters for your upcoming residential design
-      layout.</p>
-    <a href="/contact" class="btn-accent">Initialize Your Consultation</a>
+    <h2>Ready to Initialize Your New Build?</h2>
+    <p>Have blueprints, site layouts, or engineered plans ready? Connect with licensed general contractor [Your Name
+      Here] to submit your specs for a comprehensive construction review.</p>
+    <a href="/#quote-section" class="btn-accent">Upload Your Build Plans &rarr;</a>
   </div>
 </section>
 
