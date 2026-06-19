@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- ROOT HOME PAGE (Highest Priority) -->
   <url>
     <loc>https://www.buildinghomeco.com/</loc>
     <lastmod>2026-06-19</lastmod>
@@ -9,7 +7,6 @@
     <priority>1.00</priority>
   </url>
 
-  <!-- ABOUT / CRAFTSMEN MODULE -->
   <url>
     <loc>https://www.buildinghomeco.com/about</loc>
     <lastmod>2026-06-19</lastmod>
@@ -17,7 +14,6 @@
     <priority>0.80</priority>
   </url>
 
-  <!-- MAIN SERVICES ECOSYSTEM MAP -->
   <url>
     <loc>https://www.buildinghomeco.com/services</loc>
     <lastmod>2026-06-19</lastmod>
@@ -25,12 +21,22 @@
     <priority>0.80</priority>
   </url>
 
-  <!-- CONSULTATION / CONTACT GATEWAY -->
   <url>
     <loc>https://www.buildinghomeco.com/contact</loc>
     <lastmod>2026-06-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
-
+  <url>
+    <loc>https://www.buildinghomeco.com/terms</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.buildinghomeco.com/testimonials</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
 </urlset>

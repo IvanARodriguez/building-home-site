@@ -1,0 +1,18 @@
+Allow: /
+Allow: /about
+Allow: /contact
+Allow: /services
+Allow: /testimonials
+Allow: /terms
+
+Disallow: /node_modules
+Disallow: /config
+Disallow: /src/
+
+Disallow: /contact?*
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+Host: buildinghomeco.com
+Sitemap: https://buildinghomeco.com/sitemap.xml
