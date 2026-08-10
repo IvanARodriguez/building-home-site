@@ -3,51 +3,92 @@
 <footer class="site-footer">
   <div class="container footer-grid">
 
-    <!-- BRAND COLUMN -->
+    <!-- BRAND & CONTACT COLUMN -->
     <div class="brand-column">
       <a href="/" class="footer-logo" aria-label="Building Home - Return to Homepage">
-        <img src="/building-home-logo.svg" width="170" alt="Building Home Logo" />
+        <!-- Added explicit height attribute to fix Cumulative Layout Shift (CLS) -->
+        <img src="/building-home-logo.svg" width="170" height="45" alt="Building Home Logo" />
       </a>
       <p>
-        Florida Certified new construction and structural framing specialists. Delivering premier custom estates from
-        foundation to handover across the entire State of Florida.
+        Florida Certified new construction and structural framing specialists. Delivering premier custom estates and
+        commercial shells from foundation to handover across the entire State of Florida.
       </p>
+
+      <!-- Direct Contact & NAP Details for Google E-E-A-T Signals -->
+      <div class="footer-contact-details"
+        style="margin: 1rem 0; font-size: 0.875rem; color: #cbd5e1; line-height: 1.6;">
+        <p style="margin: 0.25rem 0;">
+          <strong>Direct:</strong> <a href="tel:+18135550199" style="color: inherit; text-decoration: none;">(813)
+            555-0199</a>
+        </p>
+        <p style="margin: 0.25rem 0;">
+          <strong>Headquarters:</strong> Brandon, FL 33511
+        </p>
+      </div>
+
       <div class="legal-badge">
-        <span class="license-number">FL License #CBC1267326</span>
+        <a href="https://www.myfloridalicense.com/" target="_blank" rel="noopener nofollow"
+          style="color: #d4af37; text-decoration: none; font-weight: 700;">
+          FL License #CBC1267326 ↗
+        </a>
       </div>
     </div>
 
-    <!-- STRATEGIC NAVIGATION Links Column -->
+    <!-- STRATEGIC NAVIGATION LINKS COLUMN -->
     <div class="links-column">
       <h4>Navigation</h4>
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">Our Standards</a></li>
-        <li><a href="/services">Services</a></li>
-        <li><a href="/portfolio">Our Work</a></li>
+        <li><a href="/" class="<%= currentPath === '/' ? 'active' : '' %>">Home</a></li>
+        <li><a href="/about" class="<%= currentPath === '/about' ? 'active' : '' %>">Our Standards</a></li>
+        <li><a href="/services" class="<%= currentPath.startsWith('/services') ? 'active' : '' %>">Services</a></li>
+        <li><a href="/portfolio" class="<%= currentPath === '/portfolio' ? 'active' : '' %>">Our Work</a></li>
+        <li><a href="/testimonials" class="<%= currentPath === '/testimonials' ? 'active' : '' %>">Testimonials</a></li>
+        <li><a href="/contact">Get a Quote</a></li>
         <li><a href="/terms">Terms of Service</a></li>
       </ul>
     </div>
 
-    <!-- COVERAGE AREA Links Column -->
-    <div class="links-column">
+    <!-- EXPANDED REGIONAL & COUNTY COVERAGE COLUMN -->
+    <div class="links-column coverage-column">
       <h4>Coverage Area</h4>
-      <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0; max-width: 300px;">
-        Providing comprehensive residential construction services statewide. Fully insured and licensed for municipal,
-        interior, and high-velocity coastal storm zones throughout Florida.
+      <p style="color: #94a3b8; font-size: 0.875rem; line-height: 1.5; margin-bottom: 0.75rem;">
+        Providing comprehensive custom residential and commercial construction services across <strong>Tampa
+          Bay</strong> and statewide Florida.
       </p>
+
+      <!-- Multi-County Grid Layout for Hyperlocal Keyword Crawling -->
+      <div
+        style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem; font-size: 0.8rem; color: #cbd5e1; border-top: 1px solid #1e293b; padding-top: 0.75rem;">
+        <div>
+          <strong style="color: #f8fafc; display: block; margin-bottom: 0.2rem;">Hillsborough County</strong>
+          <span>Tampa, Brandon, Riverview, Lutz, Plant City</span>
+        </div>
+        <div>
+          <strong style="color: #f8fafc; display: block; margin-bottom: 0.2rem;">Pinellas County</strong>
+          <span>St. Petersburg, Clearwater, Palm Harbor</span>
+        </div>
+        <div>
+          <strong style="color: #f8fafc; display: block; margin-bottom: 0.2rem;">Pasco County</strong>
+          <span>Wesley Chapel, Land O' Lakes, New Port Richey</span>
+        </div>
+        <div>
+          <strong style="color: #f8fafc; display: block; margin-bottom: 0.2rem;">Polk & South Region</strong>
+          <span>Lakeland, Bradenton, Sarasota</span>
+        </div>
+      </div>
     </div>
 
   </div>
 
-  <!-- BOTTOM BAR (Cleaned up container hierarchy to fix breaking flex lines) -->
+  <!-- BOTTOM BAR & LEGAL DISCLAIMER -->
   <div class="container">
-    <div class="bottom-bar" style="border-top: 1px solid #1e293b; padding-top: 2rem; width: 100%;">
-      <p>&copy; <%= new Date().getFullYear() %> Building Home. All rights reserved.</p>
-      <p class="footer-disclaimer">
-        All construction projects are subject to the <a href="/terms"
-          style="color: inherit; text-decoration: underline;">Terms of Service</a>, specifications, and regulatory
-        frameworks outlined under FL statute regulations.
+    <div class="bottom-bar"
+      style="border-top: 1px solid #1e293b; padding-top: 2rem; width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+      <p style="margin: 0;">&copy; <%= new Date().getFullYear() %> Building Home. All rights reserved.</p>
+      <p class="footer-disclaimer" style="margin: 0; font-size: 0.8rem; color: #64748b; max-width: 600px;">
+        Building Home is a Florida Certified General Contractor (#CBC1267326). All construction operations and
+        contracted scope are executed in full compliance with the Florida Building Code and applicable local municipal
+        regulations.
       </p>
     </div>
   </div>

@@ -1,23 +1,56 @@
 <%- include('partials/header') %>
 
+<!-- CONTACT PAGE JSON-LD SCHEMA (Local Business Intake & E-E-A-T) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": "https://www.buildinghomeco.com/contact#webpage",
+  "url": "https://www.buildinghomeco.com/contact",
+  "name": "Contact Building Home | Free Construction Estimate Tampa Bay",
+  "description": "Submit your engineered blueprints or custom project configurations directly to Florida Certified General Contractor Building Home.",
+  "mainEntity": {
+    "@type": "GeneralContractor",
+    "@id": "https://www.buildinghomeco.com/#organization",
+    "name": "Building Home",
+    "license": "CBC1267326",
+    "telephone": "+1-813-555-0199",
+    "email": "info@buildinghomeco.com",
+    "areaServed": ["Tampa", "Brandon", "Wesley Chapel", "Clearwater", "St. Petersburg"]
+  }
+}
+</script>
+
+<!-- CONTACT HERO MODULE -->
 <section class="contact-hero" aria-label="State-Certified Licensed Contractor Intake Context">
   <div class="container">
-    <span class="badge" style="display: inline-block; margin-bottom: 1rem;">State-Certified Licensed General Contractor
-      • License #CBC1267326</span>
-    <h1>Initialize Construction Scope</h1>
+    <span class="badge" style="display: inline-block; margin-bottom: 1rem;">
+      State-Certified Licensed General Contractor •
+      <a href="https://www.myfloridalicense.com/" target="_blank" rel="noopener nofollow"
+        style="color: inherit; text-decoration: underline;">License #CBC1267326</a>
+    </span>
+    <h1>Get a Free Construction Estimate | Tampa Bay & Brandon FL</h1>
     <p>Submit your engineered plans, site blueprints, or custom project configurations directly to our field estimating
       directors to establish your construction pipeline.</p>
   </div>
 </section>
 
+<!-- INTAKE & FORM LAYOUT SECTION -->
 <section class="contact-layout-section section-spacing">
   <div class="container">
 
     <div style="max-width: 600px; margin: 0 auto 2.5rem auto; text-align: center;">
-      <h2>Free Estimate Contact</h2>
+      <h2>Submit Your Blueprint or Build Request</h2>
+      <p style="margin-top: 0.5rem; color: #64748b;">
+        Looking for specific structural capabilities? Review our <a href="/services"
+          style="color: inherit; text-decoration: underline;">General Contractor Services</a> or learn more about <a
+          href="/about" style="color: inherit; text-decoration: underline;">Our Certified Leadership</a> before
+        submitting.
+      </p>
     </div>
 
-    <div class="form-wrapper">
+    <!-- Targeted Anchor ID for Site-Wide "Upload Build Plans" CTA Redirects -->
+    <div id="quote-section" class="form-wrapper">
       <%- include('partials/form') %>
     </div>
 

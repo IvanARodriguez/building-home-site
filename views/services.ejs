@@ -1,10 +1,67 @@
 <%- include('partials/header') %>
 
+<!-- JSON-LD OFFER CATALOG SCHEMA (Single-Page Multi-Service Local SEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GeneralContractor",
+  "@id": "https://www.buildinghomeco.com/#organization",
+  "name": "Building Home",
+  "url": "https://www.buildinghomeco.com/services",
+  "telephone": "+1-813-555-0199",
+  "priceRange": "$$$$",
+  "license": "CBC1267326",
+  "areaServed": [
+    { "@type": "State", "name": "Florida" },
+    { "@type": "AdministrativeArea", "name": "Tampa Bay Area" },
+    { "@type": "City", "name": "Tampa" },
+    { "@type": "City", "name": "Brandon" },
+    { "@type": "City", "name": "Wesley Chapel" },
+    { "@type": "City", "name": "Clearwater" },
+    { "@type": "City", "name": "St. Petersburg" }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "General Contracting & Commercial Construction Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom New Home Construction",
+          "description": "Ground-up luxury residential construction, engineering, and HVHZ wind-load protection across Tampa Bay.",
+          "areaServed": ["Tampa", "Brandon", "Wesley Chapel", "Clearwater"]
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Commercial New Construction & Shell Builds",
+          "description": "Turnkey commercial structural steel framing, base shell construction, and concrete foundations.",
+          "areaServed": ["Tampa", "St. Petersburg", "Clearwater", "Florida"]
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "High-Scale Footprint Additions & Structural Engineering",
+          "description": "Load-bearing beam swaps, multi-story additions, and heavy foundation expansions.",
+          "areaServed": ["Brandon", "Tampa", "St. Petersburg"]
+        }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- SERVICES HERO MODULE -->
 <section class="services-hero" aria-label="Licensed General Contractor Services Introduction">
   <div class="container">
-    <h1>Our Licensed Construction Capabilities</h1>
-    <p>Florida Certified custom home building, commercial site development, and heavy general contracting under the
-      engineering direction of licensed general contractor Building Home.</p>
+    <h1>Licensed General Contractor Services | Tampa Bay & Statewide FL</h1>
+    <p>Florida Certified custom home building, commercial site development, and heavy structural general contracting
+      under the engineering direction of Building Home (FL License #CBC1267326).</p>
   </div>
 </section>
 
@@ -13,25 +70,32 @@
   <div class="container detail-grid">
     <div class="text-content">
       <span class="price-indicator">Ground-Up General Contracting</span>
-      <h2>Custom New Home Construction</h2>
+      <h2>Custom New Home Construction | Tampa Bay & Wesley Chapel</h2>
       <p>We construct elite contemporary estates that balance architectural minimalist design with the extreme
         structural integrity required for Florida climates. Managed from day one by Florida Certified licensed
-        contractor
-        Building Home, our ground-up build pipelines handle raw land clearing, heavy foundation pours, and total site
-        development.</p>
-      <p>From complex zoning and structural engineering configurations in Wesley Chapel to high-velocity coastal framing
-        in Clearwater, our firm directs the entire new construction cycle from early blueprinting to municipal handover.
-      </p>
+        contractor Gisselle Amparo, our ground-up build pipelines handle raw land clearing, heavy foundation pours, and
+        complete site development.</p>
+      <p>From complex zoning and structural engineering configurations in <strong>Wesley Chapel</strong> and
+        <strong>Brandon</strong> to high-velocity coastal framing in <strong>Clearwater</strong>, our firm directs the
+        entire new construction cycle from early blueprinting to municipal handover.</p>
+
       <ul class="spec-list">
         <li>Monolithic Slab & Deep-Soil Foundation Pours</li>
         <li>Impact Glass & Engineered Window Framing</li>
         <li>HVHZ Wind-Load Protection Engineering</li>
         <li>High-Volume Architectural Spatial Planning</li>
       </ul>
+
+      <div style="margin-top: 1.5rem;">
+        <a href="/contact#quote-section" class="btn-accent"
+          style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--brand-accent, #d4af37); color: #0f172a; font-weight: 700; text-decoration: none; border-radius: 4px;">Request
+          Custom Build Estimate &rarr;</a>
+      </div>
     </div>
-    <img class="visual-content"
-      alt="Florida Certified licensed general contractor custom new construction project site layout"
-      src="/images/construction.webp" />
+
+    <!-- Explicit dimensions prevent Cumulative Layout Shift (CLS) -->
+    <img class="visual-content" src="/images/construction.webp" width="600" height="400" loading="lazy"
+      alt="Florida Certified licensed general contractor custom new construction project site layout in Tampa Bay" />
   </div>
 </section>
 
@@ -40,22 +104,31 @@
   <div class="container detail-grid">
     <div class="text-content">
       <span class="price-indicator">Commercial General Contractor</span>
-      <h2>Commercial New Construction & Shell Builds</h2>
+      <h2>Commercial Shell Construction & Structural Steel Framing</h2>
       <p>Building Home delivers complete turnkey shell structures and comprehensive building development for commercial
-        assets, retail facilities, and office spaces across the state of Florida. As a certified building contractor,
+        assets, retail facilities, and office spaces across the state of Florida. As a certified general contractor,
         Building Home coordinates complex industrial layouts, municipal code variances, and foundational concrete
         framework execution.</p>
       <p>We ensure your commercial design blueprints are executed seamlessly, managing early infrastructure setups and
-        passing all multi-stage commercial building inspections with absolute transparency.</p>
+        passing all multi-stage commercial building inspections in <strong>Tampa</strong>, <strong>St.
+          Petersburg</strong>, and statewide with absolute transparency.</p>
+
       <ul class="spec-list">
-        <li>Commercial Structural Steel Framing</li>
-        <li>Multi-Unit Base Shell Construction</li>
-        <li>Municipal Utility Integration & Site Prep</li>
-        <li>Florida Code Compliance Oversight</li>
+        <li>Commercial Structural Steel & Concrete Shell Framing</li>
+        <li>Multi-Unit Base Shell Construction & Layouts</li>
+        <li>Municipal Utility Integration & Heavy Site Prep</li>
+        <li>Florida Building Code Compliance Oversight</li>
       </ul>
+
+      <div style="margin-top: 1.5rem;">
+        <a href="/contact#quote-section" class="btn-accent"
+          style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--brand-accent, #d4af37); color: #0f172a; font-weight: 700; text-decoration: none; border-radius: 4px;">Submit
+          Commercial Blueprints &rarr;</a>
+      </div>
     </div>
-    <img class="visual-content" src="/images/open-concept.webp"
-      alt="Commercial new construction structural shell framing site layout" />
+
+    <img class="visual-content" src="/images/open-concept.webp" width="600" height="400" loading="lazy"
+      alt="Commercial new construction structural shell framing site layout in Florida" />
   </div>
 </section>
 
@@ -64,22 +137,31 @@
   <div class="container detail-grid">
     <div class="text-content">
       <span class="price-indicator">Structural Engineering Footprints</span>
-      <h2>High-Scale Footprint Additions</h2>
+      <h2>High-Scale Structural Additions & Footprint Expansions</h2>
       <p>Increase your active commercial or residential square footage through complex architectural expansions that
         permanently expand your building footprint. We specialize in high-scale structural alterations, entirely
         steering away from superficial cosmetic updates in favor of heavy engineering, structural load transfers, and
         multi-story structural framing.</p>
       <p>Building Home calculates precise load-bearing distribution matrices to seamlessly integrate heavy foundation
-        expansions into historic or classic properties in Brandon, Tampa, and St. Petersburg.</p>
+        expansions into historic or classic properties across <strong>Brandon</strong>, <strong>Tampa</strong>, and
+        <strong>St. Petersburg</strong>.</p>
+
       <ul class="spec-list">
-        <li>Load-Bearing Wall Removals & Beam Swaps</li>
-        <li>Multi-Story Structural Home Additions</li>
+        <li>Load-Bearing Wall Removals & Heavy Beam Swaps</li>
+        <li>Multi-Story Structural Home & Commercial Additions</li>
         <li>Continuous Engineered Roof-Line Tie-Ins</li>
-        <li>Foundation Expansions & Concrete Reinforcement</li>
+        <li>Foundation Expansions & Concrete Matrix Reinforcement</li>
       </ul>
+
+      <div style="margin-top: 1.5rem;">
+        <a href="/contact#quote-section" class="btn-accent"
+          style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--brand-accent, #d4af37); color: #0f172a; font-weight: 700; text-decoration: none; border-radius: 4px;">Consult
+          Engineering Team &rarr;</a>
+      </div>
     </div>
-    <img class="visual-content" src="/images/bathroom-2.webp"
-      alt="Heavy residential foundation extension and structural framing build process" />
+
+    <img class="visual-content" src="/images/bathroom-2.webp" width="600" height="400" loading="lazy"
+      alt="Heavy residential foundation extension and structural framing build process in Brandon FL" />
   </div>
 </section>
 

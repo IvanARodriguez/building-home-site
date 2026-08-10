@@ -4,20 +4,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Building Home Portal" />
+
+  <!-- Core Page Metadata -->
   <title><%= seo.title %></title>
   <meta name="description" content="<%= seo.description %>">
-  <meta name="keywords" content="<%= seo.keywords %>">
+  <link rel="canonical" href="<%= seo.canonicalUrl || ('https://buildinghome.com' + currentPath) %>" />
 
+  <!-- Open Graph / Social Sharing -->
   <meta property="og:title" content="<%= seo.title %>">
   <meta property="og:description" content="<%= seo.description %>">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="<%= seo.ogType || 'website' %>">
+  <meta property="og:url" content="<%= seo.canonicalUrl || ('https://buildinghome.com' + currentPath) %>">
+  <meta property="og:image" content="<%= seo.ogImage || 'https://buildinghome.com/images/livingroom.webp' %>">
+  <meta property="og:site_name" content="Building Home">
 
   <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Dynamic JSON-LD Structured Data for Local E-E-A-T -->
+  <% if (typeof schemaData !== 'undefined' && schemaData) { %>
+  <script type="application/ld+json">
+      <%- JSON.stringify(schemaData) %>
+    </script>
+  <% } else { %>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "GeneralContractor",
+      "@id": "https://buildinghome.com/#organization",
+      "name": "Building Home",
+      "alternateName": "Tampa Bay Construction Group",
+      "url": "https://buildinghome.com",
+      "logo": "https://buildinghome.com/building-home-logo.svg",
+      "image": "https://buildinghome.com/images/livingroom.webp",
+      "description": "Florida Certified Licensed General Contractor specializing in modern ground-up custom estates, high-scale additions, and commercial shell framing across Tampa Bay and statewide Florida.",
+      "license": "CBC1267326",
+      "telephone": "+1-813-555-0199",
+      "priceRange": "$$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Brandon",
+        "addressRegion": "FL",
+        "postalCode": "33511",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        /* State Entity */
+        {
+          "@type": "State",
+          "name": "Florida",
+          "sameAs": "https://en.wikipedia.org/wiki/Florida"
+        },
+        /* Regional Metro Hub */
+        {
+          "@type": "AdministrativeArea",
+          "name": "Tampa Bay Area",
+          "sameAs": "https://en.wikipedia.org/wiki/Tampa_Bay_area"
+        },
+        /* Counties Covered */
+        { "@type": "AdministrativeArea", "name": "Hillsborough County" },
+        { "@type": "AdministrativeArea", "name": "Pinellas County" },
+        { "@type": "AdministrativeArea", "name": "Pasco County" },
+        { "@type": "AdministrativeArea", "name": "Polk County" },
+        { "@type": "AdministrativeArea", "name": "Manatee County" },
+        { "@type": "AdministrativeArea", "name": "Sarasota County" },
+        /* Major Core Cities & Surrounding Suburbs */
+        { "@type": "City", "name": "Tampa" },
+        { "@type": "City", "name": "Brandon" },
+        { "@type": "City", "name": "St. Petersburg" },
+        { "@type": "City", "name": "Clearwater" },
+        { "@type": "City", "name": "Wesley Chapel" },
+        { "@type": "City", "name": "Riverview" },
+        { "@type": "City", "name": "Lutz" },
+        { "@type": "City", "name": "Lakeland" },
+        { "@type": "City", "name": "Bradenton" },
+        { "@type": "City", "name": "Sarasota" },
+        { "@type": "City", "name": "Land O' Lakes" },
+        { "@type": "City", "name": "Plant City" },
+        { "@type": "City", "name": "Valrico" },
+        { "@type": "City", "name": "Palm Harbor" }
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Gisselle Amparo",
+        "jobTitle": "Founder & CEO",
+        "image": "https://buildinghome.com/images/ceo.png"
+      }
+    }
+  ]
+}
+</script>
+  <% } %>
 </head>
 
 <body>
@@ -28,25 +113,33 @@
     to main content</a>
 
   <header class="site-header">
+    <!-- Top License & Verification Bar -->
     <div
       style="background: #0f172a; color: #94a3b8; font-size: 0.75rem; padding: 0.4rem 0; border-bottom: 1px solid #1e293b;">
       <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
         <span>Florida Certified Licensed General Contractor</span>
-        <span style="color: #d4af37; font-weight: 700;">FL License #CBC1267326</span>
+        <a href="https://www.myfloridalicense.com/" target="_blank" rel="noopener nofollow"
+          style="color: #d4af37; font-weight: 700; text-decoration: none;">
+          FL License #CBC1267326 ↗
+        </a>
       </div>
     </div>
+
+    <!-- Main Navigation Layout -->
     <div class="container header-layout">
       <a href="/" class="logo" aria-label="Building Home - Return to Homepage">
-        <img src="/building-home-logo.svg" width="170" alt="Building Home Logo" />
+        <!-- Added explicit dimensions to prevent Cumulative Layout Shift (CLS) -->
+        <img src="/building-home-logo.svg" width="170" height="45" alt="Building Home Logo" />
       </a>
 
       <nav class="main-nav" aria-label="Primary Site Navigation">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/testimonials">Testimonials</a></li>
-          <li><a href="/terms">Terms</a></li>
+          <li><a href="/" class="<%= currentPath === '/' ? 'active' : '' %>">Home</a></li>
+          <li><a href="/about" class="<%= currentPath === '/about' ? 'active' : '' %>">About</a></li>
+          <li><a href="/services" class="<%= currentPath.startsWith('/services') ? 'active' : '' %>">Services</a></li>
+          <li><a href="/testimonials" class="<%= currentPath === '/testimonials' ? 'active' : '' %>">Testimonials</a>
+          </li>
+          <li><a href="/terms" class="<%= currentPath === '/terms' ? 'active' : '' %>">Terms</a></li>
           <li><a href="/contact" class="nav-btn">Get a Quote</a></li>
         </ul>
       </nav>
@@ -61,19 +154,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // --- 1. ACTIVE LINK LOGIC ---
-      const currentPath = window.location.pathname;
-      const navLinks = document.querySelectorAll('.main-nav a, .footer-nav a');
-
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (link.classList.contains('nav-btn')) return;
-
-        if (currentPath === href || (href !== '/' && currentPath.startsWith(href))) {
-          link.classList.add('active');
-        }
-      });
-
+      // Mobile Navigation Menu Toggle
       const menuToggle = document.querySelector('.menu-toggle');
       const mainNav = document.querySelector('.main-nav');
 
@@ -81,7 +162,6 @@
         menuToggle.addEventListener('click', () => {
           const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
           menuToggle.setAttribute('aria-expanded', !isExpanded);
-
           menuToggle.classList.toggle('is-active');
           mainNav.classList.toggle('is-active');
         });
