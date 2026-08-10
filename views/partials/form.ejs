@@ -12,12 +12,39 @@
 </div>
 <% } %>
 
+<!-- Load Cloudflare Turnstile Script -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<style>
+  /* Hidden honeypot wrapper using off-screen positioning instead of display:none */
+  .hp-field-container {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    z-index: -1 !important;
+  }
+</style>
+
 <form action="/contact" method="POST" class="modular-form" autocomplete="on" enctype="multipart/form-data">
 
-  <div style="display: none;" aria-hidden="true">
-    <label for="mid_initial_hp">Leave this field entirely blank if you are a human user</label>
+  <!-- Honeypot 1: Disguised field name using off-screen positioning -->
+  <div class="hp-field-container" aria-hidden="true">
+    <label for="website_url">Leave this field blank</label>
+    <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
+  </div>
+
+  <!-- Honeypot 2: Legacy field name (retained to trick bots targeting your old structure) -->
+  <div class="hp-field-container" aria-hidden="true">
+    <label for="mid_initial_hp">Leave this field blank</label>
     <input type="text" id="mid_initial_hp" name="mid_initial_hp" tabindex="-1" autocomplete="off">
   </div>
+
+  <!-- Time-gate timestamp -->
+  <input type="hidden" name="form_load_time" value="<%= Date.now() %>">
 
   <div class="field-group">
     <label for="name">Contact Name</label>
@@ -67,6 +94,11 @@
     <label for="message">Detailed Project Description</label>
     <textarea id="message" name="message" rows="5" required
       placeholder="Outline square footage parameters, acreage attributes, or specific parcel locations..."></textarea>
+  </div>
+
+  <!-- Cloudflare Turnstile Challenge -->
+  <div class="field-group full-width" style="margin-bottom: 15px;">
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAEMgH9X4qYKcQzGm"></div>
   </div>
 
   <button type="submit" class="submit-trigger">Initialize Project Scope</button>
