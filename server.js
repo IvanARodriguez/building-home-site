@@ -1,3 +1,6 @@
+// Ensure environment variables are loaded FIRST before reading process.env
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const {
@@ -12,9 +15,6 @@ const MailComposer = require('mailcomposer');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Ensure local environment variable injection works
-require('dotenv').config();
-
 // Configure view processing parameters
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -22,6 +22,12 @@ app.set('views', path.join(__dirname, 'views'));
 // Core Structural Middlewares
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+
+// Inject currentPath globally into res.locals for all EJS renders and partials
+app.use((req, res, next) => {
+	res.locals.currentPath = req.path;
+	next();
+});
 
 // ==========================================================================
 // ANTI-SPAM DEFINITION
@@ -93,7 +99,7 @@ app.get('/services', (req, res) => {
 	res.render('services', { seo });
 });
 
-// Testimonials Page Route
+// 4. Testimonials Page Route
 app.get('/testimonials', (req, res) => {
 	const seo = {
 		title: 'Licensed General Contractor Reviews | Building Home Florida',
@@ -117,7 +123,7 @@ app.get('/testimonials', (req, res) => {
 	res.render('testimonials', { seo, reviews });
 });
 
-// 4. Contact Page Render Route
+// 5. Contact Page Render Route
 app.get('/contact', (req, res) => {
 	const seo = {
 		title: 'Contact Our Builders | Building Home | Schedule Consultation',
@@ -250,7 +256,6 @@ app.post('/contact', contactLimiter, uploadSingle, async (req, res) => {
 		.replace(/</g, '&lt;')
 		.replace(/>/g, '&gt;')
 		.trim();
-	const logoUrl = 'https://cdn.buildinghomeco.com/logo.png';
 
 	// Email Body Templates
 	const clientHtmlBody = `
@@ -380,7 +385,7 @@ app.get('/terms', (req, res) => {
 	res.render('terms', { seo });
 });
 
-// Catch-all fallback
+// Catch-all fallback route
 app.get('*all', (req, res) => {
 	res.redirect('/');
 });

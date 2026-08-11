@@ -15,8 +15,7 @@
 		right: 0;
 		width: 60%;
 		height: 100%;
-		background: url('/images/hero-image.webp')
-			no-repeat center center / cover;
+		background: url('/images/hero-image.webp') no-repeat center center / cover;
 		z-index: 1;
 	}
 
@@ -364,11 +363,100 @@
 	}
 }
 
-/* HERO ELEMENTS */
 .about-hero {
-	.badge {
-		display: inline-block;
-		margin-bottom: 1rem;
+	position: relative;
+	background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f172a 100%);
+	color: #ffffff;
+	padding: 6.5rem 1.5rem 5.5rem;
+	text-align: center;
+	overflow: hidden;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Subtle blueprint grid overlay texture */
+.about-hero::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+	background-size: 40px 40px;
+	pointer-events: none;
+}
+
+/* Ambient backlight glow effect */
+.about-hero::after {
+	content: '';
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 500px;
+	height: 250px;
+	background: radial-gradient(
+		circle,
+		rgba(197, 160, 89, 0.12) 0%,
+		rgba(15, 23, 42, 0) 70%
+	);
+	pointer-events: none;
+}
+
+.about-hero .container {
+	position: relative;
+	z-index: 1;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+/* Glassmorphic Badge / Pill */
+.about-hero .badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.45rem 1.15rem;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border-radius: 9999px;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #cbd5e1;
+	margin-bottom: 1.75rem;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.about-hero h1 {
+	font-size: clamp(2.25rem, 5vw, 3.75rem);
+	font-weight: 800;
+	line-height: 1.15;
+	letter-spacing: -0.025em;
+	color: #ffffff;
+	margin-bottom: 1.25rem;
+}
+
+.about-hero p {
+	font-size: clamp(1.05rem, 2vw, 1.25rem);
+	line-height: 1.65;
+	color: #94a3b8;
+	max-width: 680px;
+	margin: 0 auto;
+	font-weight: 400;
+}
+
+/* Responsive Scaling */
+@media (max-width: 640px) {
+	.about-hero {
+		padding: 4.5rem 1rem 3.5rem;
+	}
+
+	.about-hero .badge {
+		font-size: 0.75rem;
+		padding: 0.4rem 0.85rem;
+		line-height: 1.4;
 	}
 }
 
