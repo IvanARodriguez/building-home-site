@@ -15,100 +15,113 @@
   <!-- Core Page Metadata -->
   <title><%= seo.title %></title>
   <meta name="description" content="<%= seo.description %>">
-  <link rel="canonical"
-    href="<%= seo.canonicalUrl || ('https://www.buildinghomeco.com' + (typeof currentPath !== 'undefined' ? currentPath : '')) %>" />
+
+  <% 
+    // Construct clean non-www canonical URL without trailing slashes
+    const rawPath = typeof currentPath !== 'undefined' ? currentPath : '';
+    const cleanPath = (rawPath === '/' || !rawPath) ? '' : rawPath.replace(/\/$/, '');
+    const defaultCanonical = 'https://buildinghomeco.com' + cleanPath;
+    const finalCanonical = seo.canonicalUrl || defaultCanonical;
+  %>
+
+  <link rel="canonical" href="<%= finalCanonical %>" />
 
   <!-- Open Graph / Social Sharing -->
   <meta property="og:title" content="<%= seo.title %>">
   <meta property="og:description" content="<%= seo.description %>">
   <meta property="og:type" content="<%= seo.ogType || 'website' %>">
-  <meta property="og:url"
-    content="<%= seo.canonicalUrl || ('https://www.buildinghomeco.com' + (typeof currentPath !== 'undefined' ? currentPath : '')) %>">
-  <meta property="og:image" content="<%= seo.ogImage || 'https://www.buildinghomeco.com/images/livingroom.webp' %>">
+  <meta property="og:url" content="<%= finalCanonical %>">
+  <meta property="og:image" content="<%= seo.ogImage || 'https://buildinghomeco.com/images/livingroom.webp' %>">
   <meta property="og:site_name" content="Building Home">
 
   <link rel="stylesheet" href="/css/style.css">
 
+  <% if (locals.isProduction) { %>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F3YR7F1Y3Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-F3YR7F1Y3Z');
+  </script>
+  <% } %>
+
   <!-- Dynamic JSON-LD Structured Data for Local E-E-A-T -->
   <% if (typeof schemaData !== 'undefined' && schemaData) { %>
   <script type="application/ld+json">
-      <%- JSON.stringify(schemaData) %>
-    </script>
+    <%- JSON.stringify(schemaData) %>
+  </script>
   <% } else { %>
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "GeneralContractor",
-      "@id": "https://www.buildinghomeco.com/#organization",
-      "name": "Building Home",
-      "alternateName": "Tampa Bay Construction Group",
-      "url": "https://www.buildinghomeco.com",
-      "logo": "https://www.buildinghomeco.com/building-home-logo.svg",
-      "image": "https://www.buildinghomeco.com/images/livingroom.webp",
-      "description": "Florida Certified Licensed General Contractor specializing in modern ground-up custom estates, high-scale additions, and commercial shell framing across Tampa Bay and statewide Florida.",
-      "license": "CBC1267326",
-      "telephone": "+1-813-555-0199",
-      "priceRange": "$$$$",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Brandon",
-        "addressRegion": "FL",
-        "postalCode": "33511",
-        "addressCountry": "US"
-      },
-      "areaServed": [
-        { "@type": "State", "name": "Florida", "sameAs": "https://en.wikipedia.org/wiki/Florida" },
-        { "@type": "AdministrativeArea", "name": "Tampa Bay Area", "sameAs": "https://en.wikipedia.org/wiki/Tampa_Bay_area" },
-        { "@type": "AdministrativeArea", "name": "Hillsborough County" },
-        { "@type": "AdministrativeArea", "name": "Pinellas County" },
-        { "@type": "AdministrativeArea", "name": "Pasco County" },
-        { "@type": "AdministrativeArea", "name": "Polk County" },
-        { "@type": "AdministrativeArea", "name": "Manatee County" },
-        { "@type": "AdministrativeArea", "name": "Sarasota County" },
-        { "@type": "City", "name": "Tampa" },
-        { "@type": "City", "name": "Brandon" },
-        { "@type": "City", "name": "St. Petersburg" },
-        { "@type": "City", "name": "Clearwater" },
-        { "@type": "City", "name": "Wesley Chapel" },
-        { "@type": "City", "name": "Riverview" },
-        { "@type": "City", "name": "Lutz" },
-        { "@type": "City", "name": "Lakeland" },
-        { "@type": "City", "name": "Bradenton" },
-        { "@type": "City", "name": "Sarasota" },
-        { "@type": "City", "name": "Land O' Lakes" },
-        { "@type": "City", "name": "Plant City" },
-        { "@type": "City", "name": "Valrico" },
-        { "@type": "City", "name": "Palm Harbor" }
-      ],
-      "founder": {
-        "@type": "Person",
-        "name": "Gisselle Amparo",
-        "jobTitle": "Founder & CEO",
-        "image": "https://www.buildinghomeco.com/images/ceo.png"
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "GeneralContractor",
+        "@id": "https://buildinghomeco.com/#organization",
+        "name": "Building Home",
+        "alternateName": "Tampa Bay Construction Group",
+        "url": "https://buildinghomeco.com",
+        "logo": "https://buildinghomeco.com/building-home-logo.svg",
+        "image": "https://buildinghomeco.com/images/livingroom.webp",
+        "description": "Florida Certified Licensed General Contractor specializing in modern ground-up custom estates, high-scale additions, and commercial shell framing across Tampa Bay and statewide Florida.",
+        "license": "CBC1267326",
+        "telephone": "+1-813-555-0199",
+        "priceRange": "$$$$",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Brandon",
+          "addressRegion": "FL",
+          "postalCode": "33511",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "State", "name": "Florida", "sameAs": "https://en.wikipedia.org/wiki/Florida" },
+          { "@type": "AdministrativeArea", "name": "Tampa Bay Area", "sameAs": "https://en.wikipedia.org/wiki/Tampa_Bay_area" },
+          { "@type": "AdministrativeArea", "name": "Hillsborough County" },
+          { "@type": "AdministrativeArea", "name": "Pinellas County" },
+          { "@type": "AdministrativeArea", "name": "Pasco County" },
+          { "@type": "AdministrativeArea", "name": "Polk County" },
+          { "@type": "AdministrativeArea", "name": "Manatee County" },
+          { "@type": "AdministrativeArea", "name": "Sarasota County" },
+          { "@type": "City", "name": "Tampa" },
+          { "@type": "City", "name": "Brandon" },
+          { "@type": "City", "name": "St. Petersburg" },
+          { "@type": "City", "name": "Clearwater" },
+          { "@type": "City", "name": "Wesley Chapel" },
+          { "@type": "City", "name": "Riverview" },
+          { "@type": "City", "name": "Lutz" },
+          { "@type": "City", "name": "Lakeland" },
+          { "@type": "City", "name": "Bradenton" },
+          { "@type": "City", "name": "Sarasota" },
+          { "@type": "City", "name": "Land O' Lakes" },
+          { "@type": "City", "name": "Plant City" },
+          { "@type": "City", "name": "Valrico" },
+          { "@type": "City", "name": "Palm Harbor" }
+        ],
+        "founder": {
+          "@type": "Person",
+          "name": "Gisselle Amparo",
+          "jobTitle": "Founder & CEO",
+          "image": "https://buildinghomeco.com/images/ceo.png"
+        }
       }
-    }
-  ]
-}
-</script>
+    ]
+  }
+  </script>
   <% } %>
 </head>
 
 <body>
 
-  <a href="#main-content"
-    style="position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;"
-    onfocus="this.style='position:absolute; top:0; left:0; background:var(--brand-accent); color:var(--brand-dark); padding:1rem; z-index:999; font-weight:700; text-decoration:none;'">Skip
-    to main content</a>
+  <a href="#main-content" class="skip-nav-link">Skip to main content</a>
 
   <header class="site-header">
-    <div
-      style="background: #0f172a; color: #94a3b8; font-size: 0.75rem; padding: 0.4rem 0; border-bottom: 1px solid #1e293b;">
-      <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="top-credential-bar">
+      <div class="container credential-container">
         <span>Florida Certified Licensed General Contractor</span>
-        <a href="https://www.myfloridalicense.com/" target="_blank" rel="noopener nofollow"
-          style="color: #d4af37; font-weight: 700; text-decoration: none;">
+        <a href="https://www.myfloridalicense.com/" target="_blank" rel="noopener nofollow" class="license-link">
           FL License #CBC1267326 ↗
         </a>
       </div>

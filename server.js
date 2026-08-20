@@ -59,6 +59,24 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const uploadSingle = upload.single('blueprintUpload');
 
+app.locals.isProduction = process.env.NODE_ENV === 'production';
+
+app.use((req, res, next) => {
+	// Strip trailing slashes (except for root '/')
+	if (req.path.length > 1 && req.path.endsWith('/')) {
+		const query = req.url.slice(req.path.length);
+		const cleanPath = req.path.slice(0, -1);
+		return res.redirect(301, cleanPath + query);
+	}
+
+	// Generate clean master URL for GSC
+	const domain = 'buildinghomeco.com';
+	const cleanPath = req.path === '/' ? '' : req.path;
+	res.locals.canonicalUrl = `https://${domain}${cleanPath}`;
+
+	next();
+});
+
 // ==========================================================================
 // EXPRESS ROUTING ENGINE
 // ==========================================================================
@@ -385,9 +403,10 @@ app.get('/terms', (req, res) => {
 	res.render('terms', { seo });
 });
 
-// Catch-all fallback route
-app.get('*all', (req, res) => {
-	res.redirect('/');
+app.use((req, res) => {
+	res.status(404).render('404', {
+		seo: { title: 'Page Not Found | Building Home' },
+	});
 });
 
 // Server Start

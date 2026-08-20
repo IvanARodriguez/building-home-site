@@ -77,7 +77,8 @@
         complete site development.</p>
       <p>From complex zoning and structural engineering configurations in <strong>Wesley Chapel</strong> and
         <strong>Brandon</strong> to high-velocity coastal framing in <strong>Clearwater</strong>, our firm directs the
-        entire new construction cycle from early blueprinting to municipal handover.</p>
+        entire new construction cycle from early blueprinting to municipal handover.
+      </p>
 
       <ul class="spec-list">
         <li>Monolithic Slab & Deep-Soil Foundation Pours</li>
@@ -88,8 +89,11 @@
 
       <div style="margin-top: 1.5rem;">
         <a href="/contact#quote-section" class="btn-accent"
-          style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--brand-accent, #d4af37); color: #0f172a; font-weight: 700; text-decoration: none; border-radius: 4px;">Request
-          Custom Build Estimate &rarr;</a>
+          style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--brand-accent, #d4af37); color: #0f172a; font-weight: 700; text-decoration: none; border-radius: 4px;"
+          data-ga-event="click_service_cta" data-ga-category="Conversion"
+          data-ga-label="Services - Request Custom Build Estimate">
+          Request Custom Build Estimate &rarr;
+        </a>
       </div>
     </div>
 
@@ -122,8 +126,11 @@
 
       <div style="margin-top: 1.5rem;">
         <a href="/contact#quote-section" class="btn-accent"
-          style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--brand-accent, #d4af37); color: #0f172a; font-weight: 700; text-decoration: none; border-radius: 4px;">Submit
-          Commercial Blueprints &rarr;</a>
+          style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--brand-accent, #d4af37); color: #0f172a; font-weight: 700; text-decoration: none; border-radius: 4px;"
+          data-ga-event="click_service_cta" data-ga-category="Conversion"
+          data-ga-label="Services - Submit Commercial Blueprints">
+          Submit Commercial Blueprints &rarr;
+        </a>
       </div>
     </div>
 
@@ -144,7 +151,8 @@
         multi-story structural framing.</p>
       <p>Building Home calculates precise load-bearing distribution matrices to seamlessly integrate heavy foundation
         expansions into historic or classic properties across <strong>Brandon</strong>, <strong>Tampa</strong>, and
-        <strong>St. Petersburg</strong>.</p>
+        <strong>St. Petersburg</strong>.
+      </p>
 
       <ul class="spec-list">
         <li>Load-Bearing Wall Removals & Heavy Beam Swaps</li>
@@ -155,8 +163,11 @@
 
       <div style="margin-top: 1.5rem;">
         <a href="/contact#quote-section" class="btn-accent"
-          style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--brand-accent, #d4af37); color: #0f172a; font-weight: 700; text-decoration: none; border-radius: 4px;">Consult
-          Engineering Team &rarr;</a>
+          style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--brand-accent, #d4af37); color: #0f172a; font-weight: 700; text-decoration: none; border-radius: 4px;"
+          data-ga-event="click_service_cta" data-ga-category="Conversion"
+          data-ga-label="Services - Consult Engineering Team">
+          Consult Engineering Team &rarr;
+        </a>
       </div>
     </div>
 
@@ -164,5 +175,26 @@
       alt="Heavy residential foundation extension and structural framing build process in Brandon FL" />
   </div>
 </section>
+
+<!-- GA4 Tracking Script for Services Page CTA Interactions -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-ga-event]").forEach((element) => {
+      element.addEventListener("click", function () {
+        const eventName = this.getAttribute("data-ga-event");
+        const eventCategory = this.getAttribute("data-ga-category");
+        const eventLabel = this.getAttribute("data-ga-label");
+
+        if (typeof gtag === "function") {
+          gtag("event", eventName, {
+            event_category: eventCategory,
+            event_label: eventLabel,
+            page_location: window.location.href
+          });
+        }
+      });
+    });
+  });
+</script>
 
 <%- include('partials/footer') %>

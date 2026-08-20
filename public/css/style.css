@@ -86,12 +86,54 @@ video {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
+/* Accessibility Skip Link */
+.skip-nav-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-nav-link:focus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #d4af37;
+  color: #1a2e40;
+  padding: 1rem;
+  z-index: 999;
+  font-weight: 700;
+  text-decoration: none;
+}
+
 .site-header {
   background-color: #1a2e40;
   position: sticky;
   top: 0;
   z-index: 100;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Top License Bar */
+}
+.site-header .top-credential-bar {
+  background: #0f172a;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #1e293b;
+}
+.site-header .top-credential-bar .credential-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.site-header .top-credential-bar .license-link {
+  color: #d4af37;
+  font-weight: 700;
+  text-decoration: none;
+}
+.site-header .top-credential-bar .license-link:hover {
+  text-decoration: underline;
 }
 .site-header .header-layout {
   display: flex;

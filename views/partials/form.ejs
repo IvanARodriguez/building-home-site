@@ -1,4 +1,14 @@
 <% if (typeof msg !== 'undefined' && msg) { %>
+<script>
+  // Only fire event if gtag is actually active and loaded
+  if (typeof gtag === 'function' && !window['ga-disable-G-F3YR7F1Y3Z']) {
+    gtag('event', 'generate_lead', {
+      'event_category': 'Contact',
+      'event_label': 'Blueprint Intake Submission',
+      'value': 1.0
+    });
+  }
+</script>
 <div class="status-alert success" role="alert"
   style="margin-bottom: 20px; padding: 15px; background: #ecfdf5; color: #065f46; border-radius: 6px; border: 1px solid #a7f3d0; font-weight: 600;">
   <%= msg %>

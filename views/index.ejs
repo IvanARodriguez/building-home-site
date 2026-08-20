@@ -16,7 +16,8 @@
         across Florida.</p>
 
       <div class="cta-left-group">
-        <a href="#quote-section" class="btn-pill-primary">
+        <a href="#quote-section" class="btn-pill-primary" data-ga-event="click_hero_cta" data-ga-category="Conversion"
+          data-ga-label="Hero - Upload Build Plans & Get a Quote">
           Upload Build Plans & Get a Quote
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
             stroke="currentColor" class="arrow-icon" aria-hidden="true">
@@ -34,7 +35,6 @@
   <div class="container grid-layout">
     <div class="info-column">
       <span class="meta-tag">Licensed General Contractor</span>
-      <!-- FIXED: High SEO-weight header strictly for construction rankings -->
       <h2>Statewide Custom New Construction Specialists</h2>
       <p>Building Home operates under the direct command of Florida Certified licensed general contractor Building Home,
         delivering dedicated, statewide new construction management. Our team does not take on cosmetic home updates or
@@ -44,7 +44,10 @@
       <p>As a leading certified building contractor in Florida, our heavy structural floor plans are engineered to
         easily withstand volatile coastal high-velocity hurricane zones (HVHZ) and comply flawlessly with strict
         statewide building structural codes.</p>
-      <a href="/about" class="link-arrow">Our Construction Standards &rarr;</a>
+      <a href="/about" class="link-arrow" data-ga-event="click_about_link" data-ga-category="Navigation"
+        data-ga-label="Homepage About Block - Our Construction Standards">
+        Our Construction Standards &rarr;
+      </a>
     </div>
 
     <div class="graphic-frame">
@@ -78,8 +81,10 @@
         <p>Ground-up structural execution tailored strictly to custom residential blueprints. We specialize in heavy
           site development, deep-soil concrete footings, slab pours, and structural steel framing designed to exceed
           Florida code demands.</p>
-        <a href="#quote-section" class="card-link" aria-describedby="srv-custom-home">Upload Residential Plans
-          &rarr;</a>
+        <a href="#quote-section" class="card-link" aria-describedby="srv-custom-home" data-ga-event="click_service_card"
+          data-ga-category="Service Funnel" data-ga-label="Custom Home Construction">
+          Upload Residential Plans &rarr;
+        </a>
       </article>
 
       <article class="service-card" aria-labelledby="srv-commercial">
@@ -91,8 +96,10 @@
         <p>Complete shell building and commercial general contractor oversight for retail blocks, office complexes, and
           light industrial builds. We seamlessly manage early-stage zoning, municipal engineering, and total site
           development.</p>
-        <a href="#quote-section" class="card-link" aria-describedby="srv-commercial">Submit Commercial Bid Plans
-          &rarr;</a>
+        <a href="#quote-section" class="card-link" aria-describedby="srv-commercial" data-ga-event="click_service_card"
+          data-ga-category="Service Funnel" data-ga-label="Commercial New Construction">
+          Submit Commercial Bid Plans &rarr;
+        </a>
       </article>
 
       <article class="service-card" aria-labelledby="srv-structural">
@@ -104,8 +111,10 @@
         <p>Large-scale architectural expansions and massive commercial footprint additions. Our expert field workflows
           handle continuous engineered roof tie-ins, heavy load-bearing structural column transfers, and foundation
           expansions.</p>
-        <a href="#quote-section" class="card-link" aria-describedby="srv-structural">Submit Addition Blueprints
-          &rarr;</a>
+        <a href="#quote-section" class="card-link" aria-describedby="srv-structural" data-ga-event="click_service_card"
+          data-ga-category="Service Funnel" data-ga-label="High-Scale Structural Additions">
+          Submit Addition Blueprints &rarr;
+        </a>
       </article>
 
     </div>
@@ -156,5 +165,26 @@
 
   </div>
 </section>
+
+<!-- GA4 Tracking Script for Homepage CTA Interactions -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-ga-event]").forEach((element) => {
+      element.addEventListener("click", function () {
+        const eventName = this.getAttribute("data-ga-event");
+        const eventCategory = this.getAttribute("data-ga-category");
+        const eventLabel = this.getAttribute("data-ga-label");
+
+        if (typeof gtag === "function") {
+          gtag("event", eventName, {
+            event_category: eventCategory,
+            event_label: eventLabel,
+            page_location: window.location.href
+          });
+        }
+      });
+    });
+  });
+</script>
 
 <%- include('partials/footer') %>
